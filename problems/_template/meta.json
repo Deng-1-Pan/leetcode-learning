@@ -1,0 +1,10 @@
+{
+  "id": "replace-with-problem-id",
+  "title": "Replace with title",
+  "difficulty": "easy",
+  "tags": ["数组"],
+  "vizType": "array-pointers",
+  "leetcodeUrl": "https://leetcode.com/",
+  "languages": ["python", "cpp"],
+  "code": { "python": "# Add solution code", "cpp": "// Add solution code" }
+}
