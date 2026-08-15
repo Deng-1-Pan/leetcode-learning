@@ -8,7 +8,7 @@
 .player-controls { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-5); }
 .player-controls input[type='range'] { flex: 1; min-width: 150px; accent-color: var(--color-accent); }
 .array-viz { display: grid; gap: var(--space-3); overflow-x: auto; padding: var(--space-4) 0; }
-.array-row { display: flex; gap: var(--space-2); min-width: max-content; padding-top: 1.5rem; }
+.array-row { display: flex; gap: var(--space-2); min-width: max-content; padding: 1.5rem var(--space-2) 0; }
 .array-cell { position: relative; display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border: 1px solid var(--color-border); border-radius: .5rem; background: var(--color-surface); font: 700 1.05rem var(--font-mono); }
 .array-cell.is-highlighted { background: var(--color-highlight); border-color: #d39b00; }.array-cell.is-pointer { outline: 3px solid var(--color-active); outline-offset: 2px; }
 .pointer-label { position: absolute; top: -1.45rem; max-width: 5rem; overflow: hidden; color: var(--color-active); font: 700 .7rem/1 var(--font-mono); text-overflow: ellipsis; white-space: nowrap; }
