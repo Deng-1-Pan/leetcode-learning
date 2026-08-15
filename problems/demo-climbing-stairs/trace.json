@@ -1,0 +1,158 @@
+{
+  "problemId": "demo-climbing-stairs",
+  "algorithm": "one-dimensional-dp",
+  "input": {
+    "n": 5
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "初始化：到达第 0 阶只有一种方式",
+      "grid": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "activeCell": [
+        0,
+        0
+      ],
+      "dependencies": [],
+      "note": "dp[0] = 1"
+    },
+    {
+      "step": 1,
+      "description": "初始化：到达第 1 阶只有一种方式",
+      "grid": [
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      "activeCell": [
+        0,
+        1
+      ],
+      "dependencies": [
+        [
+          0,
+          0
+        ]
+      ],
+      "note": "dp[1] = 1"
+    },
+    {
+      "step": 2,
+      "description": "计算第 2 阶：从前一阶或前两阶走来",
+      "grid": [
+        1,
+        1,
+        2,
+        null,
+        null,
+        null
+      ],
+      "activeCell": [
+        0,
+        2
+      ],
+      "dependencies": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "note": "dp[2] = 2"
+    },
+    {
+      "step": 3,
+      "description": "计算第 3 阶：从前一阶或前两阶走来",
+      "grid": [
+        1,
+        1,
+        2,
+        3,
+        null,
+        null
+      ],
+      "activeCell": [
+        0,
+        3
+      ],
+      "dependencies": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "note": "dp[3] = 3"
+    },
+    {
+      "step": 4,
+      "description": "计算第 4 阶：从前一阶或前两阶走来",
+      "grid": [
+        1,
+        1,
+        2,
+        3,
+        5,
+        null
+      ],
+      "activeCell": [
+        0,
+        4
+      ],
+      "dependencies": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "note": "dp[4] = 5"
+    },
+    {
+      "step": 5,
+      "description": "计算第 5 阶：从前一阶或前两阶走来",
+      "grid": [
+        1,
+        1,
+        2,
+        3,
+        5,
+        8
+      ],
+      "activeCell": [
+        0,
+        5
+      ],
+      "dependencies": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "note": "dp[5] = 8"
+    }
+  ]
+}

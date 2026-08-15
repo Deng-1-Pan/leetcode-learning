@@ -54,6 +54,7 @@ function renderCodeTabs(container, code = {}) {
     tabs.append(button); panels.append(panel);
   });
   container.append(tabs, panels);
+  window.Prism?.highlightAllUnder(container);
 }
 
 function wireControls(root, player) {

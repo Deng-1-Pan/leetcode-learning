@@ -1,3 +1,7 @@
+export function formatCellValue(value) {
+  return value == null ? '' : String(value);
+}
+
 /** Mount a generic 1D/2D dynamic-programming grid visualization. */
 export function mount(container, player) {
   const render = (frame) => {
@@ -13,7 +17,7 @@ export function mount(container, player) {
       cell.className = 'dp-cell';
       if (active[0] === rowIndex && active[1] === columnIndex) cell.classList.add('is-active');
       if (dependencies.has(`${rowIndex}:${columnIndex}`)) cell.classList.add('is-dependency');
-      cell.textContent = String(value);
+      cell.textContent = formatCellValue(value);
       grid.append(cell);
     }));
     container.append(grid);
