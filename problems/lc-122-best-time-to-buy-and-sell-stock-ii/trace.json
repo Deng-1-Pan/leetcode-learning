@@ -1,0 +1,158 @@
+{
+  "problemId": "lc-122-best-time-to-buy-and-sell-stock-ii",
+  "algorithm": "positive-adjacent-differences-greedy",
+  "input": {
+    "prices": [
+      7,
+      1,
+      5,
+      3,
+      6,
+      4
+    ]
+  },
+  "result": {
+    "maxProfit": 7
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "从第 1 天开始，准备比较每一天和前一天的价格",
+      "pointers": {
+        "day": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "note": "累计利润 = 0；还没有相邻价格差可以结算。"
+    },
+    {
+      "step": 1,
+      "description": "比较第 1 天与第 2 天：价格没有上涨（变化 -6），不交易",
+      "pointers": {
+        "day": 1
+      },
+      "highlightIndices": [
+        0,
+        1
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "prices[1] - prices[0] = 1 - 7 = -6；累计利润 = 0。"
+    },
+    {
+      "step": 2,
+      "description": "比较第 2 天与第 3 天：上涨 4，捕获这段涨幅",
+      "pointers": {
+        "day": 2
+      },
+      "highlightIndices": [
+        1,
+        2
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "window": {
+        "start": 1,
+        "end": 2
+      },
+      "note": "prices[2] - prices[1] = 5 - 1 = 4；累计利润 = 4。"
+    },
+    {
+      "step": 3,
+      "description": "比较第 3 天与第 4 天：价格没有上涨（变化 -2），不交易",
+      "pointers": {
+        "day": 3
+      },
+      "highlightIndices": [
+        2,
+        3
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "window": {
+        "start": 2,
+        "end": 3
+      },
+      "note": "prices[3] - prices[2] = 3 - 5 = -2；累计利润 = 4。"
+    },
+    {
+      "step": 4,
+      "description": "比较第 4 天与第 5 天：上涨 3，捕获这段涨幅",
+      "pointers": {
+        "day": 4
+      },
+      "highlightIndices": [
+        3,
+        4
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "window": {
+        "start": 3,
+        "end": 4
+      },
+      "note": "prices[4] - prices[3] = 6 - 3 = 3；累计利润 = 7。"
+    },
+    {
+      "step": 5,
+      "description": "比较第 5 天与第 6 天：价格没有上涨（变化 -2），不交易",
+      "pointers": {
+        "day": 5
+      },
+      "highlightIndices": [
+        4,
+        5
+      ],
+      "array": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ],
+      "window": {
+        "start": 4,
+        "end": 5
+      },
+      "note": "prices[5] - prices[4] = 4 - 6 = -2；累计利润 = 7。"
+    }
+  ]
+}

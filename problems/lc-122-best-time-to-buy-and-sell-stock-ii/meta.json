@@ -1,0 +1,13 @@
+{
+  "id": "lc-122-best-time-to-buy-and-sell-stock-ii",
+  "title": "Best Time to Buy and Sell Stock II",
+  "difficulty": "medium",
+  "tags": ["数组", "贪心"],
+  "vizType": "array-pointers",
+  "leetcodeUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
+  "languages": ["python", "cpp"],
+  "code": {
+    "python": "def maxProfit(prices: list[int]) -> int:\n    profit = 0\n    for day in range(1, len(prices)):\n        change = prices[day] - prices[day - 1]\n        # 连续上涨区间可以拆成每一段正的相邻差值。\n        if change > 0:\n            profit += change\n    return profit",
+    "cpp": "int maxProfit(vector<int>& prices) {\n    int profit = 0;\n    for (int day = 1; day < static_cast<int>(prices.size()); ++day) {\n        int change = prices[day] - prices[day - 1];\n        // 只捕获上涨；多个正差会还原为整段上涨利润。\n        if (change > 0) profit += change;\n    }\n    return profit;\n}"
+  }
+}

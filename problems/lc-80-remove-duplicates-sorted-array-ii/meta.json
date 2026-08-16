@@ -1,0 +1,13 @@
+{
+  "id": "lc-80-remove-duplicates-sorted-array-ii",
+  "title": "Remove Duplicates from Sorted Array II",
+  "difficulty": "medium",
+  "tags": ["数组", "双指针"],
+  "vizType": "array-pointers",
+  "leetcodeUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
+  "languages": ["python", "cpp"],
+  "code": {
+    "python": "def removeDuplicates(nums: list[int]) -> int:\n    write = 0\n    for read, value in enumerate(nums):\n        # 只在写入后不会超过两次时保留当前值。\n        if write < 2 or value != nums[write - 2]:\n            nums[write] = value\n            write += 1\n    return write",
+    "cpp": "int removeDuplicates(vector<int>& nums) {\n    int write = 0;\n    for (int read = 0; read < static_cast<int>(nums.size()); ++read) {\n        // 比较写入位置前两个元素，保证每个值至多保留两次。\n        if (write < 2 || nums[read] != nums[write - 2]) {\n            nums[write++] = nums[read];\n        }\n    }\n    return write;\n}"
+  }
+}

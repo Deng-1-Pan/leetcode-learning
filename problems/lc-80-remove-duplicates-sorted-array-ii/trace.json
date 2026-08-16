@@ -1,0 +1,280 @@
+{
+  "problemId": "lc-80-remove-duplicates-sorted-array-ii",
+  "algorithm": "sorted-read-write-two-pointers",
+  "input": {
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      3,
+      3
+    ],
+    "maxOccurrences": 2
+  },
+  "result": {
+    "length": 7,
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3,
+      3
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "read=0，检查值 0：写入 nums[0]，有效前缀长度变为 1",
+      "pointers": {
+        "read": 0,
+        "write": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "有效区还不足两个元素，当前值一定可以写入；当前有效前缀为 nums[0:1] = [0]。"
+    },
+    {
+      "step": 1,
+      "description": "read=1，检查值 0：写入 nums[1]，有效前缀长度变为 2",
+      "pointers": {
+        "read": 1,
+        "write": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "有效区还不足两个元素，当前值一定可以写入；当前有效前缀为 nums[0:2] = [0, 0]。"
+    },
+    {
+      "step": 2,
+      "description": "read=2，检查值 1：写入 nums[2]，有效前缀长度变为 3",
+      "pointers": {
+        "read": 2,
+        "write": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "nums[write-2] = nums[0] = 0，1 != 0；当前有效前缀为 nums[0:3] = [0, 0, 1]。"
+    },
+    {
+      "step": 3,
+      "description": "read=3，检查值 1：写入 nums[3]，有效前缀长度变为 4",
+      "pointers": {
+        "read": 3,
+        "write": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[write-2] = nums[1] = 0，1 != 0；当前有效前缀为 nums[0:4] = [0, 0, 1, 1]。"
+    },
+    {
+      "step": 4,
+      "description": "read=4，检查值 1：跳过：写入会让这个值在有效前缀中出现第三次",
+      "pointers": {
+        "read": 4,
+        "write": 3
+      },
+      "highlightIndices": [
+        2,
+        4
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[write-2] = nums[2] = 1，1 == 1；当前有效前缀为 nums[0:4] = [0, 0, 1, 1]。"
+    },
+    {
+      "step": 5,
+      "description": "read=5，检查值 1：跳过：写入会让这个值在有效前缀中出现第三次",
+      "pointers": {
+        "read": 5,
+        "write": 3
+      },
+      "highlightIndices": [
+        2,
+        5
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[write-2] = nums[2] = 1，1 == 1；当前有效前缀为 nums[0:4] = [0, 0, 1, 1]。"
+    },
+    {
+      "step": 6,
+      "description": "read=6，检查值 2：写入 nums[4]，有效前缀长度变为 5",
+      "pointers": {
+        "read": 6,
+        "write": 4
+      },
+      "highlightIndices": [
+        4,
+        6
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 4
+      },
+      "note": "nums[write-2] = nums[2] = 1，2 != 1；当前有效前缀为 nums[0:5] = [0, 0, 1, 1, 2]。"
+    },
+    {
+      "step": 7,
+      "description": "read=7，检查值 3：写入 nums[5]，有效前缀长度变为 6",
+      "pointers": {
+        "read": 7,
+        "write": 5
+      },
+      "highlightIndices": [
+        5,
+        7
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 5
+      },
+      "note": "nums[write-2] = nums[3] = 1，3 != 1；当前有效前缀为 nums[0:6] = [0, 0, 1, 1, 2, 3]。"
+    },
+    {
+      "step": 8,
+      "description": "read=8，检查值 3：写入 nums[6]，有效前缀长度变为 7",
+      "pointers": {
+        "read": 8,
+        "write": 6
+      },
+      "highlightIndices": [
+        6,
+        8
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 6
+      },
+      "note": "nums[write-2] = nums[4] = 2，3 != 2；当前有效前缀为 nums[0:7] = [0, 0, 1, 1, 2, 3, 3]。"
+    }
+  ]
+}

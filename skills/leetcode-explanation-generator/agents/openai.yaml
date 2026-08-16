@@ -1,0 +1,3 @@
+interface:
+  display_name: "Leetcode Explanation Generator"
+  short_description: "Turn a learning blockage into a verified visual explanation"
