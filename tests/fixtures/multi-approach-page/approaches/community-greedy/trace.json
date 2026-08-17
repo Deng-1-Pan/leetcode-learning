@@ -1,0 +1,10 @@
+{
+  "problemId": "multi-approach-fixture",
+  "approachId": "community-greedy",
+  "algorithm": "fixture-greedy",
+  "input": {},
+  "frames": [
+    { "step": 0, "description": "社区第 0 帧", "array": [2, 1], "pointers": { "day": 0 }, "highlightIndices": [0], "note": "社区初始状态" },
+    { "step": 1, "description": "社区第 1 帧", "array": [2, 1], "pointers": { "day": 1 }, "highlightIndices": [1], "note": "社区独立推进" }
+  ]
+}

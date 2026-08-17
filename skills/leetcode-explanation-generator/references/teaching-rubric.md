@@ -22,9 +22,21 @@ Review every generated `explain.md` against this rubric before it is accepted.
 - If state is expressed in notes, are the notes short and deterministic enough to make the state legible?
 - If the representation is still unclear, record the limitation rather than adding a component without approval.
 
+## Screenshot and source fidelity
+
+- Is the original-problem section a complete, word-for-word transcription of supplied screenshots, including constraints and examples?
+- Is official prose summarized rather than copied at length?
+- Is community code independently implemented instead of copied, and is the decision to include it as an independent approach recorded?
+
+## Multi-approach structure
+
+- Does every independent algorithm have its own `approaches/<id>/generate_trace.py`, `trace.json`, `meta.json` entry, and `:::viz` insertion point?
+- Are the approach players in their corresponding explanation sections and independent of one another?
+- Is an equivalent community implementation correctly treated as an “实现变体” with no duplicate player?
+
 ## Reading quality
 
-- Are sections numbered 0 through 7 and complete?
+- Does the page follow 原题 → 暴力推导 → 官方解法 → 社区解法/实现变体 → 复杂度对比的 order?
 - Are paragraphs short enough for a 780px column?
-- Does the Markdown use only engine-supported syntax?
+- Does the Markdown use only supported syntax, `:::viz`, `:::insight`, and `:::pitfall`?
 - Do Python and C++ implement the same checked algorithm as the trace generator?

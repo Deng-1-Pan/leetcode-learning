@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { bindFilterEvents } from '../engine/list-page.js';
+import { bindFilterEvents, visualizationSummary } from '../engine/list-page.js';
 
 const fakeElement = () => ({
   listeners: new Map(),
@@ -20,4 +20,9 @@ test('list filters use input for search and change for select controls', () => {
   tag.listeners.get('change')();
 
   assert.equal(renderCalls, 3);
+});
+
+test('list cards summarize v2 problems without requiring a top-level vizType', () => {
+  assert.equal(visualizationSummary({ approaches: [{ id: 'official' }, { id: 'community' }] }), '2 种解法');
+  assert.equal(visualizationSummary({ vizType: 'dp-grid' }), 'dp-grid');
 });

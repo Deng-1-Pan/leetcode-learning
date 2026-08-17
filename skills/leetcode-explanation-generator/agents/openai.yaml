@@ -1,3 +1,4 @@
 interface:
   display_name: "Leetcode Explanation Generator"
-  short_description: "Turn a learning blockage into a verified visual explanation"
+  short_description: "Build verified visual explanations from solution screenshots"
+  default_prompt: "Use $leetcode-explanation-generator to turn my problem, official, and community screenshots into a verified learning package."

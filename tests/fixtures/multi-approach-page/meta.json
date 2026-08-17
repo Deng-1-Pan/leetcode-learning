@@ -1,0 +1,25 @@
+{
+  "id": "multi-approach-fixture",
+  "title": "Multi Approach Fixture",
+  "difficulty": "medium",
+  "tags": ["测试"],
+  "leetcodeUrl": "https://example.test/multi-approach",
+  "approaches": [
+    {
+      "id": "official-dp",
+      "label": "官方解法：动态规划",
+      "sourceType": "official",
+      "vizType": "dp-grid",
+      "languages": ["python", "cpp"],
+      "code": { "python": "def official():\n    return 1", "cpp": "int official() { return 1; }" }
+    },
+    {
+      "id": "community-greedy",
+      "label": "社区高赞：贪心",
+      "sourceType": "community",
+      "vizType": "array-pointers",
+      "languages": ["python", "cpp"],
+      "code": { "python": "def community():\n    return 2", "cpp": "int community() { return 2; }" }
+    }
+  ]
+}

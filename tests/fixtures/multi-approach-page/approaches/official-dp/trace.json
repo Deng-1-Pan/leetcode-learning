@@ -1,0 +1,10 @@
+{
+  "problemId": "multi-approach-fixture",
+  "approachId": "official-dp",
+  "algorithm": "fixture-dp",
+  "input": {},
+  "frames": [
+    { "step": 0, "description": "官方第 0 帧", "grid": [1, null], "activeCell": [0, 0], "note": "官方初始状态" },
+    { "step": 1, "description": "官方第 1 帧", "grid": [1, 2], "activeCell": [0, 1], "dependencies": [[0, 0]], "note": "官方独立推进" }
+  ]
+}
