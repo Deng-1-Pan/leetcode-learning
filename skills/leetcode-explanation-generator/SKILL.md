@@ -39,7 +39,7 @@ Write `explain.md` in this order:
 
 1. `## 原题` — exact screenshot transcription.
 2. `## 暴力解法推导` — no visual player. Narrate the no-idea starting point, the natural attempt, the blockage, the brute-force algorithm, and a concrete cost. Directly answer the learner's confusion.
-3. `## 官方解法` — explain the insight as a consequence of brute-force waste, explain the algorithm, then insert its player exactly where it is discussed:
+3. `## 官方解法` — derive the insight from a concrete instance of brute-force waste before naming the technique; do not state the conclusion and then merely justify it. Explain the algorithm, then insert its player exactly where it is discussed:
 
 ```makefile
 :::insight
@@ -50,7 +50,7 @@ The one insight worth retaining.
 :::
 ```
 
-4. `## 社区高赞解法` — include only a qualifying independent approach; contrast its angle with the official approach and insert its own `:::viz` player. Otherwise use `### 实现变体` with prose only.
+4. `## 社区高赞解法` — include only a qualifying independent approach; independently derive its insight from the limitation or discarded states of the preceding approach before naming the technique. Contrast its angle with the official approach and insert its own `:::viz` player. Otherwise use `### 实现变体` with prose only.
 5. `## 复杂度对比总结` — compare brute force, official, and qualifying community approaches in a compact Markdown table or list.
 
 Use `:::pitfall` only for a concrete trap. Use fixed semantic callouts and `**bold**` for emphasis; never introduce arbitrary colors or raw HTML. The visual directive also renders that approach's Python/C++ code tabs in place.

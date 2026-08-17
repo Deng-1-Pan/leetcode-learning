@@ -11,9 +11,23 @@ Review every generated `explain.md` against this rubric before it is accepted.
 
 ## Optimization bridge
 
-- Is a concrete cost or repetition from the brute method identified?
-- Does the text explain how observing that cost produces the key invariant or equivalence?
+Apply every item in this section to **every** explanation of “why this technique / why think of this approach”, not only the first bridge from brute force. Each `:::insight` box is independently in scope: the official approach’s insight and a qualifying community approach’s insight must each derive their own idea.
+
+- Is a concrete cost, repetition, or dominated state from the immediately preceding approach identified?
+- Before stating the general technique, does the text compute or walk through a small concrete example that makes the technique necessary or natural?
+- Does the text explain how observing that example produces the key invariant or equivalence?
+- Could a reader distinguish this from a sentence that states the conclusion and then merely justifies it? If not, it fails the rubric as conclusion-first writing.
 - Is the small example sufficient to check the claimed equivalence by hand?
+
+Use LC 122’s following verified passage as the model:
+
+> 暴力枚举重复计算的是一段连续上涨的不同切分。对 `[1,2,3,4]`，一次 `1→4`
+> 的利润是 `4-1=3`；拆成每天交易则是 `(2-1)+(3-2)+(4-3)=3`，结果完全一样。
+>
+> 允许不限次数交易正是这个等价关系成立的原因：上涨的每个相邻差都可以独立
+> 捕获，连加后恰好望远镜相消为整段利润。
+
+The numeric identity is calculated and shown before the general principle, so the reader can verify it by hand before being asked to accept the conclusion. See `problems/lc-122-best-time-to-buy-and-sell-stock-ii/explain.md`.
 
 ## Trace and visual fit
 
