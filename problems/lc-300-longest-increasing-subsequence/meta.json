@@ -1,0 +1,31 @@
+{
+  "id": "lc-300-longest-increasing-subsequence",
+  "title": "Longest Increasing Subsequence",
+  "difficulty": "medium",
+  "tags": ["数组", "动态规划", "贪心", "二分查找"],
+  "leetcodeUrl": "https://leetcode.com/problems/longest-increasing-subsequence/",
+  "approaches": [
+    {
+      "id": "official-dp",
+      "label": "官方解法：动态规划",
+      "sourceType": "official",
+      "vizType": "dp-grid",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "def lengthOfLIS(nums: list[int]) -> int:\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            # 只有更小的前一个数才能接到 nums[i] 前面。\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)",
+        "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> dp(nums.size(), 1);\n    for (int i = 1; i < static_cast<int>(nums.size()); ++i) {\n        for (int j = 0; j < i; ++j) {\n            // nums[j] 更小时，才能把 nums[i] 接在后面。\n            if (nums[j] < nums[i]) {\n                dp[i] = max(dp[i], dp[j] + 1);\n            }\n        }\n    }\n    return *max_element(dp.begin(), dp.end());\n}"
+      }
+    },
+    {
+      "id": "community-greedy-binary-search",
+      "label": "社区高赞：贪心 + 二分查找",
+      "sourceType": "community",
+      "vizType": "array-pointers",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "from bisect import bisect_left\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    tails: list[int] = []\n    for num in nums:\n        # tails[k] 是长度 k + 1 的候选序列所能拥有的最小结尾。\n        slot = bisect_left(tails, num)\n        if slot == len(tails):\n            tails.append(num)\n        else:\n            tails[slot] = num\n    return len(tails)",
+        "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> tails;\n    for (int num : nums) {\n        // 找到第一个不小于 num 的结尾位置。\n        auto slot = lower_bound(tails.begin(), tails.end(), num);\n        if (slot == tails.end()) {\n            tails.push_back(num);\n        } else {\n            *slot = num;\n        }\n    }\n    return static_cast<int>(tails.size());\n}"
+      }
+    }
+  ]
+}

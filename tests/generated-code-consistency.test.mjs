@@ -43,3 +43,17 @@ test('LC 122 displayed Python and C++ implementations match the generated trace 
   const cppOutput = await runCpp(`#include <iostream>\n#include <vector>\nusing namespace std;\n${meta.code.cpp}\nint main() { vector<int> prices{7, 1, 5, 3, 6, 4}; cout << maxProfit(prices); }`);
   assert.equal(cppOutput, '7');
 });
+
+test('LC 300 displayed DP and greedy implementations match their generated trace results', async () => {
+  const meta = await metaFor('lc-300-longest-increasing-subsequence');
+  const [dp, greedy] = meta.approaches;
+  const pythonDp = `${dp.code.python}\nprint(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))`;
+  const pythonGreedy = `${greedy.code.python}\nprint(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))`;
+  assert.equal(execFileSync('python3', ['-c', pythonDp], { encoding: 'utf8' }).trim(), '4');
+  assert.equal(execFileSync('python3', ['-c', pythonGreedy], { encoding: 'utf8' }).trim(), '4');
+
+  const cppDp = await runCpp(`#include <algorithm>\n#include <iostream>\n#include <vector>\nusing namespace std;\n${dp.code.cpp}\nint main() { vector<int> nums{10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(nums); }`);
+  const cppGreedy = await runCpp(`#include <algorithm>\n#include <iostream>\n#include <vector>\nusing namespace std;\n${greedy.code.cpp}\nint main() { vector<int> nums{10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(nums); }`);
+  assert.equal(cppDp, '4');
+  assert.equal(cppGreedy, '4');
+});

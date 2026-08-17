@@ -1,0 +1,190 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "community-greedy-binary-search",
+  "algorithm": "greedy-lower-bound",
+  "input": {
+    "nums": [
+      10,
+      9,
+      2,
+      5,
+      3,
+      7,
+      101,
+      18
+    ]
+  },
+  "result": {
+    "length": 4,
+    "tails": [
+      2,
+      3,
+      7,
+      18
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "初始化候选结尾数组 tails",
+      "array": [],
+      "pointers": {},
+      "highlightIndices": [],
+      "note": "tails[k] 记录长度 k + 1 的递增序列目前能拥有的最小结尾。"
+    },
+    {
+      "step": 1,
+      "description": "处理 nums[0] = 10",
+      "array": [
+        10
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "10 比所有候选结尾都大，追加它并首次得到长度 1 的候选。 当前 tails = [10]，当前可达最长长度为 1。"
+    },
+    {
+      "step": 2,
+      "description": "处理 nums[1] = 9",
+      "array": [
+        9
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "二分找到第一个不小于 9 的位置 0，用 9 替换 10，给未来留出更低的结尾。 当前 tails = [9]，当前可达最长长度为 1。"
+    },
+    {
+      "step": 3,
+      "description": "处理 nums[2] = 2",
+      "array": [
+        2
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "二分找到第一个不小于 2 的位置 0，用 2 替换 9，给未来留出更低的结尾。 当前 tails = [2]，当前可达最长长度为 1。"
+    },
+    {
+      "step": 4,
+      "description": "处理 nums[3] = 5",
+      "array": [
+        2,
+        5
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "5 比所有候选结尾都大，追加它并首次得到长度 2 的候选。 当前 tails = [2, 5]，当前可达最长长度为 2。"
+    },
+    {
+      "step": 5,
+      "description": "处理 nums[4] = 3",
+      "array": [
+        2,
+        3
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "二分找到第一个不小于 3 的位置 1，用 3 替换 5，给未来留出更低的结尾。 当前 tails = [2, 3]，当前可达最长长度为 2。"
+    },
+    {
+      "step": 6,
+      "description": "处理 nums[5] = 7",
+      "array": [
+        2,
+        3,
+        7
+      ],
+      "pointers": {
+        "slot": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "7 比所有候选结尾都大，追加它并首次得到长度 3 的候选。 当前 tails = [2, 3, 7]，当前可达最长长度为 3。"
+    },
+    {
+      "step": 7,
+      "description": "处理 nums[6] = 101",
+      "array": [
+        2,
+        3,
+        7,
+        101
+      ],
+      "pointers": {
+        "slot": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "101 比所有候选结尾都大，追加它并首次得到长度 4 的候选。 当前 tails = [2, 3, 7, 101]，当前可达最长长度为 4。"
+    },
+    {
+      "step": 8,
+      "description": "处理 nums[7] = 18",
+      "array": [
+        2,
+        3,
+        7,
+        18
+      ],
+      "pointers": {
+        "slot": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "二分找到第一个不小于 18 的位置 3，用 18 替换 101，给未来留出更低的结尾。 当前 tails = [2, 3, 7, 18]，当前可达最长长度为 4。"
+    }
+  ]
+}
