@@ -6,3 +6,6 @@
 
 - 描述不依赖播放器的算法逻辑。
 - 将可见变量和值放进每一帧，而不是由页面重新推导。
+
+:::viz approach="replace-with-approach-id"
+:::

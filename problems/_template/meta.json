@@ -3,8 +3,18 @@
   "title": "Replace with title",
   "difficulty": "easy",
   "tags": ["数组"],
-  "vizType": "array-pointers",
   "leetcodeUrl": "https://leetcode.com/",
-  "languages": ["python", "cpp"],
-  "code": { "python": "# Add solution code", "cpp": "// Add solution code" }
+  "approaches": [
+    {
+      "id": "replace-with-approach-id",
+      "label": "Replace with approach label",
+      "sourceType": "replace-with-source-type",
+      "vizType": "replace-with-viz-type",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "# Add solution code that matches this approach's generator",
+        "cpp": "// Add solution code that matches this approach's generator"
+      }
+    }
+  ]
 }
