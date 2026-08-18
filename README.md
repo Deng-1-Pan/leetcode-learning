@@ -1,6 +1,6 @@
 # LeetCode 动态可视化讲解站
 
-一个可部署至 GitHub Pages 的零构建静态站点：算法执行逻辑在题目包生成轨迹，浏览器只播放帧数据。站点用 Skill 驱动单解法与多解法内容生成，当前发布 `demo-two-sum`、`demo-climbing-stairs`、LC 80、LC 122、LC 300 共 5 道题，并兼容 v1 与 v2 页面格式。
+一个可部署至 GitHub Pages 的零构建静态站点：算法执行逻辑在题目包生成轨迹，浏览器只播放帧数据。站点用 Skill 驱动单解法与多解法内容生成，当前仅发布 LC 80、LC 122、LC 300 三道题，并兼容 v1 与 v2 页面格式。
 
 ## 本地使用
 
@@ -25,7 +25,7 @@ node scripts/build-index.mjs
 
 ```sh
 node --test
-python3 problems/demo-two-sum/generate_trace.py --check
+python3 problems/lc-80-remove-duplicates-sorted-array-ii/generate_trace.py --check
 node scripts/build-index.mjs
 ```
 

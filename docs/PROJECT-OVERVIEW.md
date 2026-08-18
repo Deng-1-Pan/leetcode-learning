@@ -71,9 +71,9 @@ problems/<id>/                 每道题一个内容包，字段契约见 docs/E
   meta.json                     v1（题目层 vizType）或 v2（approaches 数组）
   explain.md                    正文，仅支持受限 Markdown 子集 + :::viz/:::insight/:::pitfall
   index.html
-  _qc-checklist.md              生成自检清单，不进页面渲染（目前只有 LC 300 有，见"当前状态"）
+  _qc-checklist.md              生成自检清单，不进页面渲染（LC 80、LC 122、LC 300 均有）
   approaches/<approach-id>/     仅 v2 使用：各自的 generate_trace.py + trace.json
-  _template/                    新题目起点——**目前仍是 v1 单解法格式**（见"当前状态"）
+  _template/                    新题目起点——v2 单 approach 格式
 
 skills/leetcode-explanation-generator/
   SKILL.md                      讲解生成流程契约（输入要求、页面结构、QC 流程）
@@ -91,17 +91,15 @@ docs/ENGINE-SPEC.md              player / 组件 / meta.json / trace.json / expl
 
 | id | 难度 | 格式 | vizType(s) | 备注 |
 | --- | --- | --- | --- | --- |
-| `demo-two-sum` | easy | v1 | array-pointers | Phase 1 demo |
-| `demo-climbing-stairs` | easy | v1 | dp-grid | Phase 1b 补的 dp-grid 验证 |
-| `lc-80-remove-duplicates-sorted-array-ii` | medium | v1 | array-pointers | Phase 2，无 `_qc-checklist.md` |
-| `lc-122-best-time-to-buy-and-sell-stock-ii` | medium | v1 | array-pointers | Phase 2，无 `_qc-checklist.md`；"关键洞察"好范例来源 |
-| `lc-300-longest-increasing-subsequence` | medium | v2 | dp-grid（官方）+ array-pointers（社区） | Phase 3，唯一有 `_qc-checklist.md` 的题目 |
+| `lc-80-remove-duplicates-sorted-array-ii` | medium | v1 | array-pointers | Phase 2，已补追溯式 `_qc-checklist.md` |
+| `lc-122-best-time-to-buy-and-sell-stock-ii` | medium | v1 | array-pointers | Phase 2，已补追溯式 `_qc-checklist.md`；"关键洞察"好范例来源 |
+| `lc-300-longest-increasing-subsequence` | medium | v2 | dp-grid（官方）+ array-pointers（社区） | Phase 3，含 `_qc-checklist.md` |
 
 ### 关键命令速查
 
 ```sh
 node scripts/build-index.mjs                              # 生成 problems-index.json
-node --test                                                 # 跑全部 25 个 test case
+node --test                                                 # 跑全部 24 个 test case
 python3 problems/<id>/generate_trace.py --check             # v1 题目校验轨迹
 python3 problems/<id>/approaches/<approach-id>/generate_trace.py --check  # v2 题目校验轨迹
 python3 -m http.server                                      # 本地预览（页面靠 fetch 读 JSON/Markdown，不能直接双击 HTML）
@@ -212,19 +210,13 @@ fix: correct write-2 target in LC 80 insight walkthrough
 
 ### 顺带发现、尚未处理的缺口（不在任何已确认任务范围内，仅记录）
 
-1. **`_qc-checklist.md` 覆盖不全**：只有 LC 300 有这个文件；LC 80 和 LC 122
-   没有，尽管 `SKILL.md` 从它们生成时起（`20dd0f0`）就已经要求这个文件
-   存在。
-2. **`_template/` 仍是 v1 格式**：顶层 `vizType` 字段、没有 `approaches`
-   数组，和 `ENGINE-SPEC.md` "新题目应使用 v2" 的建议不一致。照 README 的
-   "复制 `problems/_template/`" 步骤操作会产出不推荐的格式。
-3. **三个占位组件文件**：`viz-backtrack-tree.js` / `viz-stack-queue.js` /
+1. **三个占位组件文件**：`viz-backtrack-tree.js` / `viz-stack-queue.js` /
    `viz-tree-graph.js` 从 Phase 1 就在仓库里，各 4 行注释，无实现、未在
    `viz-registry.js` 注册。不违反"按需扩展、不预判性开发"的原则（因为没有
    实际代码，等同于没做），但如果未来真的要做这几类可视化，说明当初已经
    预留过文件名，可以直接复用而不必重新决定命名。
 
-这三条都是本次核查时顺带发现的既有状态，不是这次任务要处理的对象。
+这条是本次核查时顺带发现的既有状态，不是这次任务要处理的对象。
 
 ## 后续方向
 
