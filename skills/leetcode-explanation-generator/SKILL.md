@@ -112,6 +112,7 @@ Create `problems/<id>/_qc-checklist.md`; it is not page content. It must record:
 - every `:::viz` resolves to one distinct player;
 - browser test confirms independent next/previous/slider/play/reset behavior;
 - every `activeLine` anchor resolves to the action represented by its frame; browser checks confirm the highlight follows next/previous/slider and maps correctly after switching Python/C++ tabs;
+- every official and community approach has its own independently derived `:::insight`: it must use a concrete example to contrast the immediately preceding approach before naming the technique. The surrounding “这一小步要解决什么” scaffolding does not substitute for this check; a missing or conclusion-first insight fails QC;
 - insight/pitfall render safely and the QC file is absent from the page.
 - the knowledge map identifies the primary knowledge being tested and explains the role of each supplied route;
 - every first-use symbol and selected example value completes the symbol-and-example handoff above.

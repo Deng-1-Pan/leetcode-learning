@@ -138,6 +138,10 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 
 **直接看答案：** 不用。缓存里已有答案。
 
+:::insight
+官方 DP 要先按下标从左到右填表，才知道算 `dp[5]` 时 `dp[2]`、`dp[4]` 已经在那里。换成递归时，计算 `dfs(4)` 会问一次 `dfs(2)`，随后计算 `dfs(5)` 又会问同一个 `dfs(2)`；两次的答案都是“以 `nums[2] = 2` 结尾，长度为 1”。第一次把 `dfs(2) = 1` 存下，第二次直接拿回这个值，就可以按需要提问而不必先设计填表顺序。
+:::
+
 :::viz approach="community-memoized-dfs"
 :::
 
@@ -154,6 +158,10 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 **5 秒想一想：** 算 `f[5]` 时，可以直接使用 `f[0]` 到 `f[4]` 吗？
 
 **直接看答案：** 可以。它们已经先被填好。
+
+:::insight
+记忆化算 `dfs(5)` 时，会临时检查 `dfs(2)`、`dfs(4)` 有没有缓存；递推则先算出 `f[2] = 1` 和 `f[4] = 2`，轮到 `i = 5` 时直接读取它们，得到同样的 `f[5] = 3`。两种写法保存的是同一张答案表，差别只在访问顺序：一个用到才算并查缓存，一个提前从左到右把左边全部填好。既然每个转移只依赖更左边的位置，顺序填表就不需要再判断“这格算过没有”。
+:::
 
 :::viz approach="community-iterative-dp"
 :::
@@ -172,6 +180,10 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 
 **直接看答案：** 留 `9`。任何能接在 `99999` 后的数，也能接在 `9` 后。
 
+:::insight
+递推会给每个原下标留一格：`nums[0] = 10` 和 `nums[1] = 9` 都得到长度 1，但以后若一个数能接在 `10` 后，它一定也能接在更小的 `9` 后。长度相同的这两格里，`10` 就不必继续保留；每种长度只留下最小结尾即可。按长度留下的结尾会从小到大排列，于是把这些代表值放进 `g` 后，既压缩了重复状态，也能用二分找到该替换的位置。
+:::
+
 :::viz approach="community-greedy-binary-extra-space"
 :::
 
@@ -189,6 +201,10 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 
 **直接看答案：** 不会。长度没变，只是把同长度的结尾换小。
 
+:::insight
+额外空间版读到 `nums[5] = 7` 时，候选结尾只可能是像 `[2,3,7]` 这样的 3 格，而前面已经读过 6 个原数组位置。候选表的长度从不会超过已读元素数，所以这 3 格可以借用已经读完的 `nums[0:3]`，不会覆盖还没读取的 `nums[5]`。看出这个“候选前缀永远追不上读取位置”的关系后，就能把 `g` 原地放回输入数组，省掉新数组。
+:::
+
 :::viz approach="community-greedy-binary-in-place"
 :::
 
@@ -205,6 +221,10 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 **5 秒想一想：** 为什么回溯出来后要反转？
 
 **直接看答案：** 因为我们从最后一个数往前找，顺序刚好反了。
+
+:::insight
+原地候选表先看到 `nums[0] = 10` 时会写下 `10`，再看到 `nums[1] = 9` 时就用 `9` 覆盖它；表还知道“长度 1 存在”，却已经忘了那条候选来自哪个原下标。若处理 `nums[5] = 7` 时决定接在 `nums[4] = 3` 后面，就额外记下 `previous[5] = 4`。候选表继续只负责长度，前驱表保留来路；最后从最长结尾沿前驱倒着走，再反转，就能还原一条具体 LIS。
+:::
 
 :::viz approach="community-reconstruct-lis"
 :::

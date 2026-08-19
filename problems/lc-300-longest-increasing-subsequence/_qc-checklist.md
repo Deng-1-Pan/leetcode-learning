@@ -13,3 +13,4 @@
 - [x] 在 `http://localhost:8005/` 复测：显示 8 个播放器；分别点击第一个和最后一个后恰好两者步进，控制台 error/warning 为 0。
 - [x] 已按“前提链与因果连续性”复查：知识地图明确区分算法思想与数组容器；官方 DP 首次出现 `dp[i]` 前，先给出状态问题、表格用途、`nums[2] = 2` 的基例和 `nums[5] = 7` 的转移来源。
 - [x] 在当前工作树的 `http://localhost:8006/` 真实浏览器复测代码行高亮：官方 DP 用 next/previous 在初始化 `dp = [1] * len(nums)` 与转移 `dp[i] = max(...)` 间切换，slider 跳到第 7 帧仍定位转移行，切换 C++ 后定位 `vector<int> dp(...)`；官方二分方案依次看到 `sub.append(num)`、`sub[slot] = num`，previous 回到追加行。控制台 error/warning 为 0。
+- [x] 已核对：官方三个方案与社区五个方案均有独立推导的 `:::insight`；社区方案的对比对象是社区列表中紧邻的上一个方案，第一项则对比官方 DP。
