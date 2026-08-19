@@ -27,4 +27,7 @@ test('LC 80 retains every supplied official and community approach as a full pac
   assert.equal((explanation.match(/:::viz approach=/g) ?? []).length, 3);
   assert.match(explanation, /:::insight/);
   assert.match(explanation, /:::pitfall/);
+  assert.match(explanation, /5 秒想一想/);
+  assert.match(explanation, /直接看答案/);
+  assert.match(explanation, /现在只需要记住/);
 });

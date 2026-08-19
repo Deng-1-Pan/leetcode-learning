@@ -56,6 +56,19 @@ The one insight worth retaining.
 4. `## 社区高赞解法` — create one complete `### 方案 N：…` subsection for **every supplied community approach**, in source order. Independently derive its insight from the preceding approach, contrast it with the relevant official approach, then include its own player and Python/C++ code. Never replace a supplied community answer with an “实现变体” prose-only section.
 5. `## 复杂度对比总结` — compare every supplied official and community approach in a compact Markdown table or list.
 
+## Zero-basics and ADHD-friendly teaching
+
+Assume the learner may have no prerequisite vocabulary, may need more time to turn a sentence into a mental picture, and may lose focus when one paragraph carries several ideas. Accuracy is necessary but is not sufficient: make the path to each idea easy to re-enter after an interruption.
+
+- Introduce one new idea at a time. Start each reasoning unit with its immediate goal, then use short, direct sentences.
+- On first use, write the everyday meaning before the term, for example “把以前算过的答案记下来（记忆化）”. State what that idea is useful for **right now**.
+- Before a formula or general rule, walk through a tiny numeric example. Translate the formula back into ordinary language immediately afterward.
+- For every formal approach, use this order: immediate goal → plain-language concept → tiny walkthrough → optional five-second check → immediate answer and reason → one memory sentence.
+- A check is optional help, never a gate. Label it `**5 秒想一想：**`; ask only one local judgment after enough information has appeared; follow it immediately with `**直接看答案：**` and the reason. Do not ask the learner to reconstruct an entire algorithm in their head.
+- End every approach with `**现在只需要记住：**` followed by one short, actionable sentence.
+- Explicitly state common boundaries and non-examples when they prevent a likely misconception, such as “`tails` 不是最终 LIS 本身”.
+- Keep player notes in the same order: current action → reason → current result. Use short sentences.
+
 Use `:::pitfall` only for a concrete trap. Use fixed semantic callouts and `**bold**` for emphasis; never introduce arbitrary colors or raw HTML. The visual directive also renders that approach's Python/C++ code tabs in place.
 
 ## QC artifact and verification

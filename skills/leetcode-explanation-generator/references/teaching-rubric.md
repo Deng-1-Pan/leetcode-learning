@@ -55,3 +55,13 @@ The numeric identity is calculated and shown before the general principle, so th
 - Are paragraphs short enough for a 780px column?
 - Does the Markdown use only supported syntax, `:::viz`, `:::insight`, and `:::pitfall`?
 - Do Python and C++ implement the same checked algorithm as the trace generator?
+
+## Zero-basics and ADHD-friendly pacing
+
+- Does each paragraph introduce at most one new idea and use short, direct sentences?
+- Is every first-use technical term first explained in ordinary language and tied to a current purpose?
+- Before every `5 秒想一想` check, has the reader already received a concrete example and the decision rule?
+- Does every check immediately include `直接看答案` and its reason?
+- Does each approach close with `现在只需要记住` followed by one actionable sentence?
+- Does the explanation state what an easily confused structure is **not**, when that boundary matters for correctness?
+- Could a learner resume after losing focus by reading the immediate goal and the current memory sentence, without needing to reconstruct a long paragraph?

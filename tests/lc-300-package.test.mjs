@@ -41,5 +41,8 @@ test('LC 300 explanation follows the Skill structure and embeds all eight player
   assert.equal((explanation.match(/:::viz approach=/g) ?? []).length, 8);
   assert.match(explanation, /:::insight/);
   assert.match(explanation, /:::pitfall/);
+  assert.match(explanation, /5 秒想一想/);
+  assert.match(explanation, /直接看答案/);
+  assert.match(explanation, /现在只需要记住/);
   assert.doesNotMatch(explanation, /^\|/m, 'the safe Markdown subset does not render tables');
 });
