@@ -69,6 +69,26 @@ Assume the learner may have no prerequisite vocabulary, may need more time to tu
 - Explicitly state common boundaries and non-examples when they prevent a likely misconception, such as “`tails` 不是最终 LIS 本身”.
 - Keep player notes in the same order: current action → reason → current result. Use short sentences.
 
+## Knowledge map before solutions
+
+Do not treat “题目拆解” as only a restatement of the input and output. A learner needs to know what they are supposed to be learning before they can attach meaning to the later methods.
+
+- State plainly whether the central test is mainly an **algorithmic idea**, a **data-structure operation**, or both. Explain the distinction in ordinary language: an algorithm is the step-by-step strategy; a data structure is how information is stored and accessed.
+- Name the specific abilities the problem exercises. For example, LC 300 is primarily about sequence algorithms and state representation: dynamic programming, state compression, greedy choice, and binary search. An array is the input container here, not the main knowledge being tested.
+- When sources contain several approaches, give the reader a compact route map before the first formal solution: what each route is trying to improve, and why several correct routes can coexist. Do not imply that every route is a separate unrelated “answer”.
+- Use this map to explain what a learner should first practice. Do not use it to reveal a formal solution before its own section.
+
+## Symbol and example handoff
+
+Never introduce notation, a named value from an example, or a phrase such as “best length” as if the learner has already met it. Before a new state, variable, formula, or selected value appears, complete this handoff in order:
+
+1. Choose a concrete input and label the relevant position explicitly, for example “in `[10,9,2,5,3,7,101,18]`, we are looking at `nums[5]`, whose value is `7`”.
+2. Ask the state question in ordinary language, for example “if we insist that this little sequence ends at this `7`, how many numbers can it contain at most?” Explain why this smaller question helps the original problem.
+3. Introduce the storage in ordinary language before notation, for example “we will keep one answer in a table for every position”. Only then define the symbol: “the answer stored for position `i` is called `dp[i]`”.
+4. Work one base value and one transition with explicit inputs and outputs before writing a general recurrence. Translate every part of the recurrence back into the same ordinary-language question.
+
+Use stable names while teaching. Do not switch from “answer ending at this position” to “best length”, “state”, or `dp[i]` without saying they refer to the same thing. Do not write “calculate 7” or “look at 2 and 3” without identifying their original array positions and why those exact values were selected.
+
 Use `:::pitfall` only for a concrete trap. Use fixed semantic callouts and `**bold**` for emphasis; never introduce arbitrary colors or raw HTML. The visual directive also renders that approach's Python/C++ code tabs in place.
 
 ## QC artifact and verification
@@ -82,5 +102,7 @@ Create `problems/<id>/_qc-checklist.md`; it is not page content. It must record:
 - every `:::viz` resolves to one distinct player;
 - browser test confirms independent next/previous/slider/play/reset behavior;
 - insight/pitfall render safely and the QC file is absent from the page.
+- the knowledge map identifies the primary knowledge being tested and explains the role of each supplied route;
+- every first-use symbol and selected example value completes the symbol-and-example handoff above.
 
 Run the index build, automated tests, and real browser checks before reporting success. Read [the teaching rubric](references/teaching-rubric.md) before final acceptance.

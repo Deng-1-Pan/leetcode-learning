@@ -10,6 +10,16 @@ Review every generated `explain.md` against this rubric before it is accepted.
 - Does it directly address the learner's exact confusion without prematurely presenting one of the formal solutions?
 - Could a reader use the entry-point method to begin a nearby problem of the same type?
 
+## Knowledge map and symbol handoff
+
+- Before any formal solution, does the page say whether the problem mainly tests algorithmic strategy, data-structure use, or both? Does it explain that distinction in ordinary language?
+- Does it name the specific knowledge points and show how the supplied approaches are related routes, rather than unrelated answers?
+- Before the first `dp[i]`, `f[i]`, `g[k]`, `tails`, pointer, or recurrence, does the text first name a concrete input position and ask the corresponding ordinary-language question?
+- Does the first worked example explicitly identify each value by both its array position and value, for example `nums[5] = 7`, rather than saying “calculate 7”?
+- Before saying “best”, “longest”, or “candidate”, has the text specified *best/longest/candidate for which exact condition*?
+- Does it work at least one base case and one transition as concrete input → decision → stored result before using a general formula?
+- Could a learner point to exactly where a new symbol came from, what question it answers, and why that question helps solve the original problem?
+
 ## Optimization bridge
 
 Apply every item in this section to **every** explanation of “why this technique / why think of this approach”, including the bridge from the generic entry point to the first formal approach. Each `:::insight` box is independently in scope: the official and community approaches must each derive their own idea.
@@ -65,3 +75,4 @@ The numeric identity is calculated and shown before the general principle, so th
 - Does each approach close with `现在只需要记住` followed by one actionable sentence?
 - Does the explanation state what an easily confused structure is **not**, when that boundary matters for correctness?
 - Could a learner resume after losing focus by reading the immediate goal and the current memory sentence, without needing to reconstruct a long paragraph?
+- Does a five-second check ask only about a concept that has already completed the knowledge-map and symbol-handoff prerequisites?
