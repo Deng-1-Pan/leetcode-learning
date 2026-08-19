@@ -76,3 +76,11 @@ The numeric identity is calculated and shown before the general principle, so th
 - Does the explanation state what an easily confused structure is **not**, when that boundary matters for correctness?
 - Could a learner resume after losing focus by reading the immediate goal and the current memory sentence, without needing to reconstruct a long paragraph?
 - Does a five-second check ask only about a concept that has already completed the knowledge-map and symbol-handoff prerequisites?
+
+## Prerequisite and causal continuity
+
+- Does the page explicitly say what is mainly being tested, what is only a supporting container, and what the learner should learn first?
+- Before every symbol or named state, has the reader seen the exact ordinary-language question it answers and a concrete storage example?
+- Can every selected value be traced to a named input and index, rather than appearing only as a bare number?
+- For each use of “therefore”, “best”, “candidate”, or “add one”, is the comparison or prior result that licenses it written immediately before it?
+- Does every base case state the condition, stored value, and reason; and every transition state the previous value, eligibility test, and new value?

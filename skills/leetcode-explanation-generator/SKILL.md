@@ -89,6 +89,16 @@ Never introduce notation, a named value from an example, or a phrase such as “
 
 Use stable names while teaching. Do not switch from “answer ending at this position” to “best length”, “state”, or `dp[i]` without saying they refer to the same thing. Do not write “calculate 7” or “look at 2 and 3” without identifying their original array positions and why those exact values were selected.
 
+## Prerequisite and causality checks
+
+Treat every explanation as a chain of prerequisites. A sentence may use an object only after the reader has met its origin, role, and one concrete use.
+
+- Before the first formal approach, include a `这题在考什么` map: name the primary algorithmic skill, any supporting data structure, why several approaches may coexist, and the first concept to learn. Do not leave the learner guessing whether the test is about arrays, data structures, or algorithms.
+- Before defining a state such as `dp[i]`, first show the exact question that the state will answer in ordinary language. Then show the storage idea (“one answer per position”), then the notation. Never begin a paragraph with unexplained notation.
+- Every example value must have provenance: identify the input, its index, its value, and why it is the current focus.
+- Do not use `所以`、`因此`、`这说明`、`最好`、`候选` or “加一” unless the preceding sentences contain the specific fact or comparison that makes that step true. Write the missing middle decision explicitly.
+- A base case must be written as a full three-part statement: the exact input condition, the answer stored for it, and why that answer is valid. A transition must likewise name the previous stored answer, the eligibility comparison, and the newly stored answer.
+
 Use `:::pitfall` only for a concrete trap. Use fixed semantic callouts and `**bold**` for emphasis; never introduce arbitrary colors or raw HTML. The visual directive also renders that approach's Python/C++ code tabs in place.
 
 ## QC artifact and verification
