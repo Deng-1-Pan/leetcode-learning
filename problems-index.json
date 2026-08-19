@@ -32,7 +32,7 @@
     "approaches": [
       {
         "id": "official-dp",
-        "label": "官方解法：动态规划",
+        "label": "官方方案一：动态规划",
         "sourceType": "official",
         "vizType": "dp-grid",
         "languages": [
@@ -40,13 +40,69 @@
           "cpp"
         ],
         "code": {
-          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            # 只有更小的前一个数才能接到 nums[i] 前面。\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)",
-          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> dp(nums.size(), 1);\n    for (int i = 1; i < static_cast<int>(nums.size()); ++i) {\n        for (int j = 0; j < i; ++j) {\n            // nums[j] 更小时，才能把 nums[i] 接在后面。\n            if (nums[j] < nums[i]) {\n                dp[i] = max(dp[i], dp[j] + 1);\n            }\n        }\n    }\n    return *max_element(dp.begin(), dp.end());\n}"
+          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> dp(nums.size(), 1);\n    for (int i = 1; i < static_cast<int>(nums.size()); ++i)\n        for (int j = 0; j < i; ++j)\n            if (nums[j] < nums[i]) dp[i] = max(dp[i], dp[j] + 1);\n    return *max_element(dp.begin(), dp.end());\n}"
         }
       },
       {
-        "id": "community-greedy-binary-search",
-        "label": "社区高赞：贪心 + 二分查找",
+        "id": "official-greedy-linear-scan",
+        "label": "官方方案二：构建候选序列（线性扫描）",
+        "sourceType": "official",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    sub: list[int] = []\n    for num in nums:\n        slot = 0\n        while slot < len(sub) and sub[slot] < num:\n            slot += 1\n        if slot == len(sub):\n            sub.append(num)\n        else:\n            sub[slot] = num\n    return len(sub)",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> sub;\n    for (int num : nums) {\n        int slot = 0;\n        while (slot < static_cast<int>(sub.size()) && sub[slot] < num) ++slot;\n        if (slot == static_cast<int>(sub.size())) sub.push_back(num);\n        else sub[slot] = num;\n    }\n    return static_cast<int>(sub.size());\n}"
+        }
+      },
+      {
+        "id": "official-greedy-binary-search",
+        "label": "官方方案三：构建候选序列（二分查找）",
+        "sourceType": "official",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "from bisect import bisect_left\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    sub: list[int] = []\n    for num in nums:\n        slot = bisect_left(sub, num)\n        if slot == len(sub):\n            sub.append(num)\n        else:\n            sub[slot] = num\n    return len(sub)",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> sub;\n    for (int num : nums) {\n        auto slot = lower_bound(sub.begin(), sub.end(), num);\n        if (slot == sub.end()) sub.push_back(num);\n        else *slot = num;\n    }\n    return static_cast<int>(sub.size());\n}"
+        }
+      },
+      {
+        "id": "community-memoized-dfs",
+        "label": "社区方案一：记忆化搜索",
+        "sourceType": "community",
+        "vizType": "dp-grid",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "from functools import cache\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    @cache\n    def dfs(i: int) -> int:\n        best = 1\n        for j in range(i):\n            if nums[j] < nums[i]:\n                best = max(best, dfs(j) + 1)\n        return best\n    return max(dfs(i) for i in range(len(nums)))",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> memo(nums.size());\n    function<int(int)> dfs = [&](int i) {\n        if (memo[i]) return memo[i];\n        int best = 1;\n        for (int j = 0; j < i; ++j) if (nums[j] < nums[i]) best = max(best, dfs(j) + 1);\n        return memo[i] = best;\n    };\n    int answer = 0;\n    for (int i = 0; i < static_cast<int>(nums.size()); ++i) answer = max(answer, dfs(i));\n    return answer;\n}"
+        }
+      },
+      {
+        "id": "community-iterative-dp",
+        "label": "社区方案二：递推",
+        "sourceType": "community",
+        "vizType": "dp-grid",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    f = [1] * len(nums)\n    for i, x in enumerate(nums):\n        for j, y in enumerate(nums[:i]):\n            if y < x:\n                f[i] = max(f[i], f[j] + 1)\n    return max(f)",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> f(nums.size(), 1);\n    for (int i = 0; i < static_cast<int>(nums.size()); ++i)\n        for (int j = 0; j < i; ++j) if (nums[j] < nums[i]) f[i] = max(f[i], f[j] + 1);\n    return *max_element(f.begin(), f.end());\n}"
+        }
+      },
+      {
+        "id": "community-greedy-binary-extra-space",
+        "label": "社区方案三：贪心 + 二分（额外空间）",
         "sourceType": "community",
         "vizType": "array-pointers",
         "languages": [
@@ -54,8 +110,36 @@
           "cpp"
         ],
         "code": {
-          "python": "from bisect import bisect_left\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    tails: list[int] = []\n    for num in nums:\n        # tails[k] 是长度 k + 1 的候选序列所能拥有的最小结尾。\n        slot = bisect_left(tails, num)\n        if slot == len(tails):\n            tails.append(num)\n        else:\n            tails[slot] = num\n    return len(tails)",
-          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> tails;\n    for (int num : nums) {\n        // 找到第一个不小于 num 的结尾位置。\n        auto slot = lower_bound(tails.begin(), tails.end(), num);\n        if (slot == tails.end()) {\n            tails.push_back(num);\n        } else {\n            *slot = num;\n        }\n    }\n    return static_cast<int>(tails.size());\n}"
+          "python": "from bisect import bisect_left\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    g: list[int] = []\n    for x in nums:\n        j = bisect_left(g, x)\n        if j == len(g):\n            g.append(x)\n        else:\n            g[j] = x\n    return len(g)",
+          "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> g;\n    for (int x : nums) {\n        auto j = lower_bound(g.begin(), g.end(), x);\n        if (j == g.end()) g.push_back(x);\n        else *j = x;\n    }\n    return static_cast<int>(g.size());\n}"
+        }
+      },
+      {
+        "id": "community-greedy-binary-in-place",
+        "label": "社区方案四：贪心 + 二分（原地修改）",
+        "sourceType": "community",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "from bisect import bisect_left\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    ng = 0\n    for x in nums:\n        j = bisect_left(nums, x, 0, ng)\n        nums[j] = x\n        if j == ng:\n            ng += 1\n    return ng",
+          "cpp": "int lengthOfLIS(vector<int>& nums) {\n    int ng = 0;\n    for (int i = 0; i < static_cast<int>(nums.size()); ++i) {\n        int x = nums[i];\n        int j = lower_bound(nums.begin(), nums.begin() + ng, x) - nums.begin();\n        nums[j] = x;\n        if (j == ng) ++ng;\n    }\n    return ng;\n}"
+        }
+      },
+      {
+        "id": "community-reconstruct-lis",
+        "label": "社区方案五：返回一个具体的 LIS",
+        "sourceType": "community",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "from bisect import bisect_left\n\ndef findLIS(nums: list[int]) -> list[int]:\n    tails: list[tuple[int, int]] = []\n    previous = [-1] * len(nums)\n    for i, x in enumerate(nums):\n        j = bisect_left([value for value, _ in tails], x)\n        if j > 0:\n            previous[i] = tails[j - 1][1]\n        if j == len(tails):\n            tails.append((x, i))\n        else:\n            tails[j] = (x, i)\n    answer = []\n    index = tails[-1][1]\n    while index != -1:\n        answer.append(nums[index])\n        index = previous[index]\n    return answer[::-1]",
+          "cpp": "vector<int> findLIS(const vector<int>& nums) {\n    vector<pair<int, int>> tails;\n    vector<int> previous(nums.size(), -1);\n    for (int i = 0; i < static_cast<int>(nums.size()); ++i) {\n        int j = lower_bound(tails.begin(), tails.end(), nums[i], [](const auto& item, int value) { return item.first < value; }) - tails.begin();\n        if (j > 0) previous[i] = tails[j - 1].second;\n        if (j == static_cast<int>(tails.size())) tails.push_back({nums[i], i});\n        else tails[j] = {nums[i], i};\n    }\n    vector<int> answer;\n    for (int index = tails.back().second; index != -1; index = previous[index]) answer.push_back(nums[index]);\n    reverse(answer.begin(), answer.end());\n    return answer;\n}"
         }
       }
     ]
@@ -68,15 +152,50 @@
       "数组",
       "双指针"
     ],
-    "vizType": "array-pointers",
     "leetcodeUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
-    "languages": [
-      "python",
-      "cpp"
-    ],
-    "code": {
-      "python": "def removeDuplicates(nums: list[int]) -> int:\n    write = 0\n    for read, value in enumerate(nums):\n        # 只在写入后不会超过两次时保留当前值。\n        if write < 2 or value != nums[write - 2]:\n            nums[write] = value\n            write += 1\n    return write",
-      "cpp": "int removeDuplicates(vector<int>& nums) {\n    int write = 0;\n    for (int read = 0; read < static_cast<int>(nums.size()); ++read) {\n        // 比较写入位置前两个元素，保证每个值至多保留两次。\n        if (write < 2 || nums[read] != nums[write - 2]) {\n            nums[write++] = nums[read];\n        }\n    }\n    return write;\n}"
-    }
+    "approaches": [
+      {
+        "id": "official-pop-delete",
+        "label": "官方方案一：删除多余重复项",
+        "sourceType": "official",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n\n    i = 1\n    count = 1\n    while i < len(nums):\n        if nums[i] == nums[i - 1]:\n            count += 1\n            if count > 2:\n                nums.pop(i)\n                count -= 1\n                continue\n        else:\n            count = 1\n        i += 1\n\n    return len(nums)",
+          "cpp": "int removeDuplicates(vector<int>& nums) {\n    if (nums.empty()) return 0;\n\n    int i = 1, count = 1;\n    while (i < static_cast<int>(nums.size())) {\n        if (nums[i] == nums[i - 1]) {\n            ++count;\n            if (count > 2) {\n                nums.erase(nums.begin() + i);\n                --count;\n                continue;\n            }\n        } else {\n            count = 1;\n        }\n        ++i;\n    }\n\n    return static_cast<int>(nums.size());\n}"
+        }
+      },
+      {
+        "id": "official-overwrite",
+        "label": "官方方案二：覆盖多余重复项",
+        "sourceType": "official",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n\n    read = write = 1\n    count = 1\n    while read < len(nums):\n        if nums[read] == nums[read - 1]:\n            count += 1\n            if count > 2:\n                read += 1\n                continue\n        else:\n            count = 1\n\n        nums[write] = nums[read]\n        write += 1\n        read += 1\n\n    return write",
+          "cpp": "int removeDuplicates(vector<int>& nums) {\n    if (nums.empty()) return 0;\n\n    int read = 1, write = 1, count = 1;\n    while (read < static_cast<int>(nums.size())) {\n        if (nums[read] == nums[read - 1]) {\n            ++count;\n            if (count > 2) {\n                ++read;\n                continue;\n            }\n        } else {\n            count = 1;\n        }\n\n        nums[write++] = nums[read++];\n    }\n\n    return write;\n}"
+        }
+      },
+      {
+        "id": "community-stack-write-two-back",
+        "label": "社区方案：有效前缀作栈",
+        "sourceType": "community",
+        "vizType": "array-pointers",
+        "languages": [
+          "python",
+          "cpp"
+        ],
+        "code": {
+          "python": "def removeDuplicates(nums: list[int]) -> int:\n    stack_size = 2\n    for i in range(2, len(nums)):\n        # 与有效前缀倒数第二个值比较，防止写入第三次。\n        if nums[i] != nums[stack_size - 2]:\n            nums[stack_size] = nums[i]\n            stack_size += 1\n    return min(stack_size, len(nums))",
+          "cpp": "int removeDuplicates(vector<int>& nums) {\n    int stackSize = 2;\n    for (int i = 2; i < static_cast<int>(nums.size()); ++i) {\n        // 与有效前缀倒数第二个值比较，防止写入第三次。\n        if (nums[i] != nums[stackSize - 2]) {\n            nums[stackSize++] = nums[i];\n        }\n    }\n    return min(stackSize, static_cast<int>(nums.size()));\n}"
+        }
+      }
+    ]
   }
 ]

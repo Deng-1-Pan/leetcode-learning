@@ -1,0 +1,149 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "official-greedy-binary-search",
+  "algorithm": "greedy-tails-binary-search",
+  "input": {
+    "nums": [
+      8,
+      1,
+      6,
+      2,
+      3,
+      10
+    ]
+  },
+  "result": {
+    "length": 4,
+    "tails": [
+      1,
+      2,
+      3,
+      10
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "初始化候选结尾数组 sub",
+      "array": [],
+      "pointers": {},
+      "highlightIndices": [],
+      "note": "候选结尾按升序排列，因此可以二分定位替换位置。"
+    },
+    {
+      "step": 1,
+      "description": "处理 nums[0] = 8",
+      "array": [
+        8
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "二分结果在末尾，追加 8 并把最长长度扩展到 1。 当前 sub = [8]。"
+    },
+    {
+      "step": 2,
+      "description": "处理 nums[1] = 1",
+      "array": [
+        1
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "二分找到第一个不小于 1 的位置 0，用它压低结尾 8。 当前 sub = [1]。"
+    },
+    {
+      "step": 3,
+      "description": "处理 nums[2] = 6",
+      "array": [
+        1,
+        6
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "二分结果在末尾，追加 6 并把最长长度扩展到 2。 当前 sub = [1, 6]。"
+    },
+    {
+      "step": 4,
+      "description": "处理 nums[3] = 2",
+      "array": [
+        1,
+        2
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "二分找到第一个不小于 2 的位置 1，用它压低结尾 6。 当前 sub = [1, 2]。"
+    },
+    {
+      "step": 5,
+      "description": "处理 nums[4] = 3",
+      "array": [
+        1,
+        2,
+        3
+      ],
+      "pointers": {
+        "slot": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "二分结果在末尾，追加 3 并把最长长度扩展到 3。 当前 sub = [1, 2, 3]。"
+    },
+    {
+      "step": 6,
+      "description": "处理 nums[5] = 10",
+      "array": [
+        1,
+        2,
+        3,
+        10
+      ],
+      "pointers": {
+        "slot": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "二分结果在末尾，追加 10 并把最长长度扩展到 4。 当前 sub = [1, 2, 3, 10]。"
+    }
+  ]
+}

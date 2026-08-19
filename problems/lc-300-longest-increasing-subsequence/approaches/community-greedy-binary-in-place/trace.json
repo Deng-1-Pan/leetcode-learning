@@ -1,0 +1,255 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "community-greedy-binary-in-place",
+  "algorithm": "greedy-binary-search-in-place",
+  "input": {
+    "nums": [
+      10,
+      9,
+      2,
+      5,
+      3,
+      7,
+      101,
+      18
+    ]
+  },
+  "result": {
+    "length": 4,
+    "prefix": [
+      2,
+      3,
+      7,
+      18
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "把 nums 的前缀视为 g",
+      "array": [
+        10,
+        9,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "ng": 0
+      },
+      "highlightIndices": [],
+      "note": "ng = 0；尚无候选。之后 nums[0:ng] 复用为 g，不额外分配数组。"
+    },
+    {
+      "step": 1,
+      "description": "处理原输入 nums[0] = 10",
+      "array": [
+        10,
+        9,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 0,
+        "ng": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "在有效前缀 [0, 0] 中二分定位 0；写回 nums[0] = 10。 位置原在末尾，ng 加一。"
+    },
+    {
+      "step": 2,
+      "description": "处理原输入 nums[1] = 9",
+      "array": [
+        9,
+        9,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 0,
+        "ng": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "在有效前缀 [0, 0] 中二分定位 0；写回 nums[0] = 9。 替换同长度候选的结尾，ng 不变。"
+    },
+    {
+      "step": 3,
+      "description": "处理原输入 nums[2] = 2",
+      "array": [
+        2,
+        9,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 0,
+        "ng": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "在有效前缀 [0, 0] 中二分定位 0；写回 nums[0] = 2。 替换同长度候选的结尾，ng 不变。"
+    },
+    {
+      "step": 4,
+      "description": "处理原输入 nums[3] = 5",
+      "array": [
+        2,
+        5,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 1,
+        "ng": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "在有效前缀 [0, 1] 中二分定位 1；写回 nums[1] = 5。 位置原在末尾，ng 加一。"
+    },
+    {
+      "step": 5,
+      "description": "处理原输入 nums[4] = 3",
+      "array": [
+        2,
+        3,
+        2,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 1,
+        "ng": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "在有效前缀 [0, 1] 中二分定位 1；写回 nums[1] = 3。 替换同长度候选的结尾，ng 不变。"
+    },
+    {
+      "step": 6,
+      "description": "处理原输入 nums[5] = 7",
+      "array": [
+        2,
+        3,
+        7,
+        5,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 2,
+        "ng": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "在有效前缀 [0, 2] 中二分定位 2；写回 nums[2] = 7。 位置原在末尾，ng 加一。"
+    },
+    {
+      "step": 7,
+      "description": "处理原输入 nums[6] = 101",
+      "array": [
+        2,
+        3,
+        7,
+        101,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 3,
+        "ng": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "在有效前缀 [0, 3] 中二分定位 3；写回 nums[3] = 101。 位置原在末尾，ng 加一。"
+    },
+    {
+      "step": 8,
+      "description": "处理原输入 nums[7] = 18",
+      "array": [
+        2,
+        3,
+        7,
+        18,
+        3,
+        7,
+        101,
+        18
+      ],
+      "pointers": {
+        "slot": 3,
+        "ng": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "在有效前缀 [0, 3] 中二分定位 3；写回 nums[3] = 18。 替换同长度候选的结尾，ng 不变。"
+    }
+  ]
+}

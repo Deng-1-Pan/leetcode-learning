@@ -2,18 +2,19 @@
 
 Review every generated `explain.md` against this rubric before it is accepted.
 
-## Brute-force derivation
+## Problem breakdown and generic entry point
 
-- Does the explanation start with a natural action a learner without a solution could attempt?
-- Does it show at least one obstacle, failed shortcut, or decision that leads to the brute-force method?
-- Does it name the learner's exact confusion and answer it directly?
-- Could a reader distinguish the derivation from a sentence that merely announces the brute-force algorithm?
+- Before any source solution, does the explanation accurately state what the judge checks and which constraints materially shape the solution?
+- Does it name and briefly explain the relevant concepts, rather than assuming the reader already recognizes the pattern?
+- Does it identify the broader problem pattern and give a reusable first-footing method for this kind of problem?
+- Does it directly address the learner's exact confusion without prematurely presenting one of the formal solutions?
+- Could a reader use the entry-point method to begin a nearby problem of the same type?
 
 ## Optimization bridge
 
-Apply every item in this section to **every** explanation of “why this technique / why think of this approach”, not only the first bridge from brute force. Each `:::insight` box is independently in scope: the official approach’s insight and a qualifying community approach’s insight must each derive their own idea.
+Apply every item in this section to **every** explanation of “why this technique / why think of this approach”, including the bridge from the generic entry point to the first formal approach. Each `:::insight` box is independently in scope: the official and community approaches must each derive their own idea.
 
-- Is a concrete cost, repetition, or dominated state from the immediately preceding approach identified?
+- Is a concrete constraint, cost, repetition, or dominated state from the generic entry point or immediately preceding approach identified?
 - Before stating the general technique, does the text compute or walk through a small concrete example that makes the technique necessary or natural?
 - Does the text explain how observing that example produces the key invariant or equivalence?
 - Could a reader distinguish this from a sentence that states the conclusion and then merely justifies it? If not, it fails the rubric as conclusion-first writing.
@@ -44,13 +45,13 @@ The numeric identity is calculated and shown before the general principle, so th
 
 ## Multi-approach structure
 
-- Does every independent algorithm have its own `approaches/<id>/generate_trace.py`, `trace.json`, `meta.json` entry, and `:::viz` insertion point?
+- Does every supplied official and community approach have its own `approaches/<id>/generate_trace.py`, `trace.json`, `meta.json` entry, and `:::viz` insertion point?
 - Are the approach players in their corresponding explanation sections and independent of one another?
-- Is an equivalent community implementation correctly treated as an “实现变体” with no duplicate player?
+- Are equivalent supplied implementations still retained as full packages, as required by the input contract?
 
 ## Reading quality
 
-- Does the page follow 原题 → 暴力推导 → 官方解法 → 社区解法/实现变体 → 复杂度对比的 order?
+- Does the page follow 原题 → 题目拆解与通用切入点 → 官方解法 → 社区解法 → 复杂度对比的 order?
 - Are paragraphs short enough for a 780px column?
 - Does the Markdown use only supported syntax, `:::viz`, `:::insight`, and `:::pitfall`?
 - Do Python and C++ implement the same checked algorithm as the trace generator?

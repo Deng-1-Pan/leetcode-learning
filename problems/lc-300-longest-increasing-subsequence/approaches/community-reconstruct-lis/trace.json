@@ -1,0 +1,290 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "community-reconstruct-lis",
+  "algorithm": "binary-search-tails-with-predecessor-reconstruction",
+  "input": {
+    "nums": [
+      10,
+      9,
+      2,
+      5,
+      3,
+      7,
+      101,
+      18
+    ]
+  },
+  "result": {
+    "length": 4,
+    "lis": [
+      2,
+      3,
+      7,
+      18
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "初始化候选结尾和前驱记录",
+      "array": [],
+      "pointers": {},
+      "highlightIndices": [],
+      "note": "除了每个长度的最小结尾，还会保存该结尾的原下标，并为每个元素记录前驱。"
+    },
+    {
+      "step": 1,
+      "description": "处理 nums[0] = 10",
+      "array": [
+        10
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "追加新的最长长度；previous[0] = -1。候选结尾为 [10]。"
+    },
+    {
+      "step": 2,
+      "description": "处理 nums[1] = 9",
+      "array": [
+        9
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "替换同长度的候选结尾；previous[1] = -1。候选结尾为 [9]。"
+    },
+    {
+      "step": 3,
+      "description": "处理 nums[2] = 2",
+      "array": [
+        2
+      ],
+      "pointers": {
+        "slot": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "替换同长度的候选结尾；previous[2] = -1。候选结尾为 [2]。"
+    },
+    {
+      "step": 4,
+      "description": "处理 nums[3] = 5",
+      "array": [
+        2,
+        5
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "追加新的最长长度；previous[3] = 2。候选结尾为 [2, 5]。"
+    },
+    {
+      "step": 5,
+      "description": "处理 nums[4] = 3",
+      "array": [
+        2,
+        3
+      ],
+      "pointers": {
+        "slot": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "替换同长度的候选结尾；previous[4] = 2。候选结尾为 [2, 3]。"
+    },
+    {
+      "step": 6,
+      "description": "处理 nums[5] = 7",
+      "array": [
+        2,
+        3,
+        7
+      ],
+      "pointers": {
+        "slot": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "追加新的最长长度；previous[5] = 4。候选结尾为 [2, 3, 7]。"
+    },
+    {
+      "step": 7,
+      "description": "处理 nums[6] = 101",
+      "array": [
+        2,
+        3,
+        7,
+        101
+      ],
+      "pointers": {
+        "slot": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "追加新的最长长度；previous[6] = 5。候选结尾为 [2, 3, 7, 101]。"
+    },
+    {
+      "step": 8,
+      "description": "处理 nums[7] = 18",
+      "array": [
+        2,
+        3,
+        7,
+        18
+      ],
+      "pointers": {
+        "slot": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "替换同长度的候选结尾；previous[7] = 5。候选结尾为 [2, 3, 7, 18]。"
+    },
+    {
+      "step": 9,
+      "description": "从下标 7 沿前驱回溯",
+      "array": [
+        18
+      ],
+      "pointers": {
+        "current": 0
+      },
+      "highlightIndices": [
+        0
+      ],
+      "window": {
+        "start": 0,
+        "end": 0
+      },
+      "note": "取到 18，下一前驱为 5。当前回溯片段需反转后才是正向序列。"
+    },
+    {
+      "step": 10,
+      "description": "从下标 5 沿前驱回溯",
+      "array": [
+        7,
+        18
+      ],
+      "pointers": {
+        "current": 1
+      },
+      "highlightIndices": [
+        1
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "取到 7，下一前驱为 4。当前回溯片段需反转后才是正向序列。"
+    },
+    {
+      "step": 11,
+      "description": "从下标 4 沿前驱回溯",
+      "array": [
+        3,
+        7,
+        18
+      ],
+      "pointers": {
+        "current": 2
+      },
+      "highlightIndices": [
+        2
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "取到 3，下一前驱为 2。当前回溯片段需反转后才是正向序列。"
+    },
+    {
+      "step": 12,
+      "description": "从下标 2 沿前驱回溯",
+      "array": [
+        2,
+        3,
+        7,
+        18
+      ],
+      "pointers": {
+        "current": 3
+      },
+      "highlightIndices": [
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "取到 2，下一前驱为 -1。当前回溯片段需反转后才是正向序列。"
+    },
+    {
+      "step": 13,
+      "description": "完成一条具体的最长递增子序列",
+      "array": [
+        2,
+        3,
+        7,
+        18
+      ],
+      "pointers": {},
+      "highlightIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "反转回溯结果，得到 LIS = [2, 3, 7, 18]。"
+    }
+  ]
+}

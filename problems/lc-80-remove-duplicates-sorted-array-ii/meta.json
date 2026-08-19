@@ -3,11 +3,40 @@
   "title": "Remove Duplicates from Sorted Array II",
   "difficulty": "medium",
   "tags": ["数组", "双指针"],
-  "vizType": "array-pointers",
   "leetcodeUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
-  "languages": ["python", "cpp"],
-  "code": {
-    "python": "def removeDuplicates(nums: list[int]) -> int:\n    write = 0\n    for read, value in enumerate(nums):\n        # 只在写入后不会超过两次时保留当前值。\n        if write < 2 or value != nums[write - 2]:\n            nums[write] = value\n            write += 1\n    return write",
-    "cpp": "int removeDuplicates(vector<int>& nums) {\n    int write = 0;\n    for (int read = 0; read < static_cast<int>(nums.size()); ++read) {\n        // 比较写入位置前两个元素，保证每个值至多保留两次。\n        if (write < 2 || nums[read] != nums[write - 2]) {\n            nums[write++] = nums[read];\n        }\n    }\n    return write;\n}"
-  }
+  "approaches": [
+    {
+      "id": "official-pop-delete",
+      "label": "官方方案一：删除多余重复项",
+      "sourceType": "official",
+      "vizType": "array-pointers",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n\n    i = 1\n    count = 1\n    while i < len(nums):\n        if nums[i] == nums[i - 1]:\n            count += 1\n            if count > 2:\n                nums.pop(i)\n                count -= 1\n                continue\n        else:\n            count = 1\n        i += 1\n\n    return len(nums)",
+        "cpp": "int removeDuplicates(vector<int>& nums) {\n    if (nums.empty()) return 0;\n\n    int i = 1, count = 1;\n    while (i < static_cast<int>(nums.size())) {\n        if (nums[i] == nums[i - 1]) {\n            ++count;\n            if (count > 2) {\n                nums.erase(nums.begin() + i);\n                --count;\n                continue;\n            }\n        } else {\n            count = 1;\n        }\n        ++i;\n    }\n\n    return static_cast<int>(nums.size());\n}"
+      }
+    },
+    {
+      "id": "official-overwrite",
+      "label": "官方方案二：覆盖多余重复项",
+      "sourceType": "official",
+      "vizType": "array-pointers",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "def removeDuplicates(nums: list[int]) -> int:\n    if not nums:\n        return 0\n\n    read = write = 1\n    count = 1\n    while read < len(nums):\n        if nums[read] == nums[read - 1]:\n            count += 1\n            if count > 2:\n                read += 1\n                continue\n        else:\n            count = 1\n\n        nums[write] = nums[read]\n        write += 1\n        read += 1\n\n    return write",
+        "cpp": "int removeDuplicates(vector<int>& nums) {\n    if (nums.empty()) return 0;\n\n    int read = 1, write = 1, count = 1;\n    while (read < static_cast<int>(nums.size())) {\n        if (nums[read] == nums[read - 1]) {\n            ++count;\n            if (count > 2) {\n                ++read;\n                continue;\n            }\n        } else {\n            count = 1;\n        }\n\n        nums[write++] = nums[read++];\n    }\n\n    return write;\n}"
+      }
+    },
+    {
+      "id": "community-stack-write-two-back",
+      "label": "社区方案：有效前缀作栈",
+      "sourceType": "community",
+      "vizType": "array-pointers",
+      "languages": ["python", "cpp"],
+      "code": {
+        "python": "def removeDuplicates(nums: list[int]) -> int:\n    stack_size = 2\n    for i in range(2, len(nums)):\n        # 与有效前缀倒数第二个值比较，防止写入第三次。\n        if nums[i] != nums[stack_size - 2]:\n            nums[stack_size] = nums[i]\n            stack_size += 1\n    return min(stack_size, len(nums))",
+        "cpp": "int removeDuplicates(vector<int>& nums) {\n    int stackSize = 2;\n    for (int i = 2; i < static_cast<int>(nums.size()); ++i) {\n        // 与有效前缀倒数第二个值比较，防止写入第三次。\n        if (nums[i] != nums[stackSize - 2]) {\n            nums[stackSize++] = nums[i];\n        }\n    }\n    return min(stackSize, static_cast<int>(nums.size()));\n}"
+      }
+    }
+  ]
 }

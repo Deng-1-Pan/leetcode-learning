@@ -50,7 +50,7 @@ problems/<id>/
 }
 ```
 
-题目共用必填字段为 `id`、`title`、`difficulty`、`tags`、`leetcodeUrl`。v2 的 `approaches` 必须非空，且每项的 `id` 唯一；`id`、`label`、`sourceType`、`vizType`、`languages`、`code` 都是必填字段。`sourceType` 仅可为 `official` 或 `community`；当前注册的 `vizType` 为 `array-pointers`、`dp-grid`。
+题目共用必填字段为 `id`、`title`、`difficulty`、`tags`、`leetcodeUrl`。v2 的 `approaches` 必须非空，且每项的 `id` 唯一；`id`、`label`、`sourceType`、`vizType`、`languages`、`code` 都是必填字段。`sourceType` 仅可为 `official` 或 `community`，并允许存在多个同来源项。每个用户提供的官方或社区方案都必须各自占一项、拥有独立 trace、播放器与代码；即使两个方案算法等价，也不得压缩为纯文字“实现变体”。当前注册的 `vizType` 为 `array-pointers`、`dp-grid`。
 
 `code` 的键是语言名、值是展示源码；它必须与该 approach 的真实 `generate_trace.py` 算法等价。页面根据 `sourceType` 自动生成“官方解法”或“社区高赞”徽章，不从 Markdown 接收颜色。
 
@@ -148,7 +148,7 @@ v2 中每个 `:::viz` 插入点会创建一个独立 `TracePlayer` 与完整控�
 
 `:::viz` 必须引用 `meta.approaches` 中唯一的 `id`，其位置就是该 approach 的播放器与代码出现的位置。`:::insight` 和 `:::pitfall` 使用固定语义颜色，不支持自定义颜色。未知或格式不正确的 `:::` 块会作为转义后的代码块原样显示，绝不解释为 HTML。
 
-建议正文依次组织为：原题截图逐字转录、暴力推导与代价、官方解法（洞察、讲解、`:::viz`）、值得独立收录的社区解法（同样结构）、以及复杂度对比。社区方案若只是官方算法的实现变体，则不放入 `approaches`，只写文字变体小节。
+建议正文依次组织为：原题截图逐字转录、题目拆解与通用切入点、按来源顺序完整列出的官方解法、按来源顺序完整列出的社区解法，以及复杂度对比。题目拆解应先说明判题契约、决定性约束、相关概念、题型模式和可迁移的切入方法，再进入具体方案。每个用户提供的方案都有洞察、讲解、`:::viz`、真实生成 trace 与 Python/C++ 代码；官方或社区方案都不能仅因较慢、等价、或属于实现变体而省略或降级为纯文字。
 
 ## 构建索引
 

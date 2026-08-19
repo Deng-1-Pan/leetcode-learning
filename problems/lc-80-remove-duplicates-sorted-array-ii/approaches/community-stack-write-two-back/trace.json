@@ -1,0 +1,260 @@
+{
+  "problemId": "lc-80-remove-duplicates-sorted-array-ii",
+  "approachId": "community-stack-write-two-back",
+  "algorithm": "stack-size-write-two-back",
+  "input": {
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      3,
+      3
+    ],
+    "maxOccurrences": 2
+  },
+  "result": {
+    "length": 7,
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3,
+      3
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "先把前两个元素作为栈底保留",
+      "pointers": {
+        "i": 1,
+        "stackSize": 1
+      },
+      "highlightIndices": [
+        0,
+        1
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 1
+      },
+      "note": "stackSize = 2；只要数组长度至少为 2，前两个元素一定合法。"
+    },
+    {
+      "step": 1,
+      "description": "i=2，检查值 1：入栈：写入 nums[2]",
+      "pointers": {
+        "i": 2,
+        "stackSize": 2
+      },
+      "highlightIndices": [
+        0,
+        2
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 2
+      },
+      "note": "nums[stackSize-2] = nums[0] = 0；1 != 0，stackSize = 3。"
+    },
+    {
+      "step": 2,
+      "description": "i=3，检查值 1：入栈：写入 nums[3]",
+      "pointers": {
+        "i": 3,
+        "stackSize": 3
+      },
+      "highlightIndices": [
+        1,
+        3
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[stackSize-2] = nums[1] = 0；1 != 0，stackSize = 4。"
+    },
+    {
+      "step": 3,
+      "description": "i=4，检查值 1：不入栈：会形成第三次出现",
+      "pointers": {
+        "i": 4,
+        "stackSize": 3
+      },
+      "highlightIndices": [
+        2,
+        4
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。"
+    },
+    {
+      "step": 4,
+      "description": "i=5，检查值 1：不入栈：会形成第三次出现",
+      "pointers": {
+        "i": 5,
+        "stackSize": 3
+      },
+      "highlightIndices": [
+        2,
+        5
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 3
+      },
+      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。"
+    },
+    {
+      "step": 5,
+      "description": "i=6，检查值 2：入栈：写入 nums[4]",
+      "pointers": {
+        "i": 6,
+        "stackSize": 4
+      },
+      "highlightIndices": [
+        2,
+        4,
+        6
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 4
+      },
+      "note": "nums[stackSize-2] = nums[2] = 1；2 != 1，stackSize = 5。"
+    },
+    {
+      "step": 6,
+      "description": "i=7，检查值 3：入栈：写入 nums[5]",
+      "pointers": {
+        "i": 7,
+        "stackSize": 5
+      },
+      "highlightIndices": [
+        3,
+        5,
+        7
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        2,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 5
+      },
+      "note": "nums[stackSize-2] = nums[3] = 1；3 != 1，stackSize = 6。"
+    },
+    {
+      "step": 7,
+      "description": "i=8，检查值 3：入栈：写入 nums[6]",
+      "pointers": {
+        "i": 8,
+        "stackSize": 6
+      },
+      "highlightIndices": [
+        4,
+        6,
+        8
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "window": {
+        "start": 0,
+        "end": 6
+      },
+      "note": "nums[stackSize-2] = nums[4] = 2；3 != 2，stackSize = 7。"
+    }
+  ]
+}

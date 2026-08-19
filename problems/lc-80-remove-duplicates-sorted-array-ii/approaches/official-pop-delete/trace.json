@@ -1,0 +1,229 @@
+{
+  "problemId": "lc-80-remove-duplicates-sorted-array-ii",
+  "approachId": "official-pop-delete",
+  "algorithm": "sorted-count-pop-delete",
+  "input": {
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      3,
+      3
+    ],
+    "maxOccurrences": 2
+  },
+  "result": {
+    "length": 7,
+    "nums": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3,
+      3
+    ]
+  },
+  "frames": [
+    {
+      "step": 0,
+      "description": "从下标 1 开始扫描；当前值已出现 1 次",
+      "pointers": {
+        "i": 1
+      },
+      "highlightIndices": [
+        0,
+        1
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 1；相同值连续出现，因此只需与前一个位置比较。"
+    },
+    {
+      "step": 1,
+      "description": "i=1，保留值 0，继续扫描",
+      "pointers": {
+        "i": 1
+      },
+      "highlightIndices": [
+        0,
+        1
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 2 <= 2；当前数组前缀仍然合法。"
+    },
+    {
+      "step": 2,
+      "description": "i=2，保留值 1，继续扫描",
+      "pointers": {
+        "i": 2
+      },
+      "highlightIndices": [
+        1,
+        2
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 1 <= 2；当前数组前缀仍然合法。"
+    },
+    {
+      "step": 3,
+      "description": "i=3，保留值 1，继续扫描",
+      "pointers": {
+        "i": 3
+      },
+      "highlightIndices": [
+        2,
+        3
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 2 <= 2；当前数组前缀仍然合法。"
+    },
+    {
+      "step": 4,
+      "description": "i=4，第 3 次出现 1：删除 nums[4]",
+      "pointers": {
+        "i": 4
+      },
+      "highlightIndices": [
+        4
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "删除后右侧元素整体左移；count 回到 2，i 保持不动以检查刚移来的元素。"
+    },
+    {
+      "step": 5,
+      "description": "i=4，第 3 次出现 1：删除 nums[4]",
+      "pointers": {
+        "i": 4
+      },
+      "highlightIndices": [
+        4
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "删除后右侧元素整体左移；count 回到 2，i 保持不动以检查刚移来的元素。"
+    },
+    {
+      "step": 6,
+      "description": "i=4，保留值 2，继续扫描",
+      "pointers": {
+        "i": 4
+      },
+      "highlightIndices": [
+        3,
+        4
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 1 <= 2；当前数组前缀仍然合法。"
+    },
+    {
+      "step": 7,
+      "description": "i=5，保留值 3，继续扫描",
+      "pointers": {
+        "i": 5
+      },
+      "highlightIndices": [
+        4,
+        5
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 1 <= 2；当前数组前缀仍然合法。"
+    },
+    {
+      "step": 8,
+      "description": "i=6，保留值 3，继续扫描",
+      "pointers": {
+        "i": 6
+      },
+      "highlightIndices": [
+        5,
+        6
+      ],
+      "array": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "note": "count = 2 <= 2；当前数组前缀仍然合法。"
+    }
+  ]
+}
