@@ -9,6 +9,47 @@ from pathlib import Path
 NUMS = [0, 0, 1, 1, 1, 1, 2, 3, 3]
 OUTPUT = Path(__file__).with_name("trace.json")
 
+PYTHON_CODE = """\
+def removeDuplicates(nums: list[int]) -> int:
+    stack_size = 2
+    for i in range(2, len(nums)):
+        # 与有效前缀倒数第二个值比较，防止写入第三次。
+        if nums[i] != nums[stack_size - 2]:
+            nums[stack_size] = nums[i]
+            stack_size += 1
+    return min(stack_size, len(nums))"""
+
+CPP_CODE = """\
+int removeDuplicates(vector<int>& nums) {
+    int stackSize = 2;
+    for (int i = 2; i < static_cast<int>(nums.size()); ++i) {
+        // 与有效前缀倒数第二个值比较，防止写入第三次。
+        if (nums[i] != nums[stackSize - 2]) {
+            nums[stackSize++] = nums[i];
+        }
+    }
+    return min(stackSize, static_cast<int>(nums.size()));
+}"""
+
+
+def line_of(source: str, anchor: str, occurrence: int = 1) -> int:
+    """Return the 1-indexed line number for an anchor in displayed source."""
+    lines = source.splitlines()
+    matches = [index for index, line in enumerate(lines, start=1) if anchor in line]
+    if len(matches) < occurrence:
+        raise SystemExit(
+            f"active-line anchor {anchor!r} (occurrence {occurrence}) not found; "
+            f"only {len(matches)} match(es) in source"
+        )
+    return matches[occurrence - 1]
+
+
+def active_line(python_anchor: str, cpp_anchor: str, *, python_occurrence: int = 1, cpp_occurrence: int = 1) -> dict:
+    return {
+        "python": line_of(PYTHON_CODE, python_anchor, python_occurrence),
+        "cpp": line_of(CPP_CODE, cpp_anchor, cpp_occurrence),
+    }
+
 
 def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
     """Run the displayed stack-size / write-two-back algorithm exactly."""
@@ -21,6 +62,7 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
             "array": nums.copy(),
             "window": {"start": 0, "end": max(0, len(nums) - 1)},
             "note": "前两个元素默认保留；这里没有第二个元素需要检查。",
+            "activeLine": active_line("return len(nums)", "return min(stackSize"),
         }]
 
     frames: list[dict] = [{
@@ -31,6 +73,7 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
         "array": nums.copy(),
         "window": {"start": 0, "end": 1},
         "note": "stackSize = 2；只要数组长度至少为 2，前两个元素一定合法。",
+        "activeLine": active_line("stack_size = 2", "int stackSize = 2"),
     }]
     stack_size = 2
     for i in range(2, len(nums)):
@@ -45,10 +88,12 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
             action = f"入栈：写入 nums[{destination}]"
             highlights = sorted({i, comparison_index, destination})
             pointer_stack = destination
+            line = active_line("nums[stack_size] = nums[i]", "nums[stackSize++] = nums[i]")
         else:
             action = "不入栈：会形成第三次出现"
             highlights = sorted({i, comparison_index})
             pointer_stack = stack_size - 1
+            line = active_line("if nums[i] != nums[stack_size - 2]", "if (nums[i] != nums[stackSize - 2])")
         frames.append({
             "step": len(frames),
             "description": f"i={i}，检查值 {value}：{action}",
@@ -57,6 +102,7 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
             "array": nums.copy(),
             "window": {"start": 0, "end": stack_size - 1},
             "note": f"nums[stackSize-2] = nums[{comparison_index}] = {comparison_value}；{value} {'!=' if allowed else '=='} {comparison_value}，stackSize = {stack_size}。",
+            "activeLine": line,
         })
     return min(stack_size, len(nums)), frames
 

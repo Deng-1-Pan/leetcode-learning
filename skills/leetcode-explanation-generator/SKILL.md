@@ -33,7 +33,7 @@ Do not substitute a web page, remembered wording, or a paraphrase for the origin
 2. List every official approach from the source, then classify them separately by algorithmic invariant; list and classify community approaches independently.
 3. Record which supplied approaches are algorithmically equivalent, but retain them anyway. “It is slower”, “it is the brute-force baseline”, or “it is only an implementation variant” is **not** grounds for omitting any supplied answer.
 4. Reuse registered visualizers. First try frame `description`/`note` for state that is not spatial. Do not extend the engine without an explicit design decision.
-5. For every supplied approach, create `approaches/<approach-id>/generate_trace.py` and generate the matching `trace.json` with `approachId`.
+5. For every supplied approach, create `approaches/<approach-id>/generate_trace.py` and generate the matching `trace.json` with `approachId`. Every frame must include `activeLine` for each displayed language, computed by uniquely locating anchor text in that approach's own displayed source—never by hand-writing a line-number literal. Keep the generator's `PYTHON_CODE`/`CPP_CODE` copies character-for-character synchronized with `meta.json.code` through an automated test.
 6. Write v2 `meta.json`: every supplied approach needs a unique `id`, source type, registered `vizType`, languages, and code.
 
 ## Page structure
@@ -111,6 +111,7 @@ Create `problems/<id>/_qc-checklist.md`; it is not page content. It must record:
 - Python/C++ output matches each generator;
 - every `:::viz` resolves to one distinct player;
 - browser test confirms independent next/previous/slider/play/reset behavior;
+- every `activeLine` anchor resolves to the action represented by its frame; browser checks confirm the highlight follows next/previous/slider and maps correctly after switching Python/C++ tabs;
 - insight/pitfall render safely and the QC file is absent from the page.
 - the knowledge map identifies the primary knowledge being tested and explains the role of each supplied route;
 - every first-use symbol and selected example value completes the symbol-and-example handoff above.

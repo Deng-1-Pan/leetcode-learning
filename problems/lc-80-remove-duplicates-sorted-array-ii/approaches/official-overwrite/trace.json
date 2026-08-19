@@ -54,7 +54,11 @@
         "start": 0,
         "end": 1
       },
-      "note": "count = 2 <= 2；有效前缀 nums[0:2] = [0, 0]。"
+      "note": "count = 2 <= 2；有效前缀 nums[0:2] = [0, 0]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     },
     {
       "step": 1,
@@ -81,7 +85,11 @@
         "start": 0,
         "end": 2
       },
-      "note": "count = 1 <= 2；有效前缀 nums[0:3] = [0, 0, 1]。"
+      "note": "count = 1 <= 2；有效前缀 nums[0:3] = [0, 0, 1]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     },
     {
       "step": 2,
@@ -108,7 +116,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "count = 2 <= 2；有效前缀 nums[0:4] = [0, 0, 1, 1]。"
+      "note": "count = 2 <= 2；有效前缀 nums[0:4] = [0, 0, 1, 1]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     },
     {
       "step": 3,
@@ -136,7 +148,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "count = 3 > 2；不写入。有效前缀 nums[0:4] = [0, 0, 1, 1]。"
+      "note": "count = 3 > 2；不写入。有效前缀 nums[0:4] = [0, 0, 1, 1]。",
+      "activeLine": {
+        "python": 11,
+        "cpp": 9
+      }
     },
     {
       "step": 4,
@@ -164,7 +180,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "count = 4 > 2；不写入。有效前缀 nums[0:4] = [0, 0, 1, 1]。"
+      "note": "count = 4 > 2；不写入。有效前缀 nums[0:4] = [0, 0, 1, 1]。",
+      "activeLine": {
+        "python": 11,
+        "cpp": 9
+      }
     },
     {
       "step": 5,
@@ -192,7 +212,11 @@
         "start": 0,
         "end": 4
       },
-      "note": "count = 1 <= 2；有效前缀 nums[0:5] = [0, 0, 1, 1, 2]。"
+      "note": "count = 1 <= 2；有效前缀 nums[0:5] = [0, 0, 1, 1, 2]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     },
     {
       "step": 6,
@@ -220,7 +244,11 @@
         "start": 0,
         "end": 5
       },
-      "note": "count = 1 <= 2；有效前缀 nums[0:6] = [0, 0, 1, 1, 2, 3]。"
+      "note": "count = 1 <= 2；有效前缀 nums[0:6] = [0, 0, 1, 1, 2, 3]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     },
     {
       "step": 7,
@@ -248,7 +276,11 @@
         "start": 0,
         "end": 6
       },
-      "note": "count = 2 <= 2；有效前缀 nums[0:7] = [0, 0, 1, 1, 2, 3, 3]。"
+      "note": "count = 2 <= 2；有效前缀 nums[0:7] = [0, 0, 1, 1, 2, 3, 3]。",
+      "activeLine": {
+        "python": 16,
+        "cpp": 16
+      }
     }
   ]
 }

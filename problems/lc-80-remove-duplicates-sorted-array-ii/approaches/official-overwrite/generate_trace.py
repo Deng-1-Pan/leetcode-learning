@@ -9,6 +9,69 @@ from pathlib import Path
 NUMS = [0, 0, 1, 1, 1, 1, 2, 3, 3]
 OUTPUT = Path(__file__).with_name("trace.json")
 
+PYTHON_CODE = """\
+def removeDuplicates(nums: list[int]) -> int:
+    if not nums:
+        return 0
+
+    read = write = 1
+    count = 1
+    while read < len(nums):
+        if nums[read] == nums[read - 1]:
+            count += 1
+            if count > 2:
+                read += 1
+                continue
+        else:
+            count = 1
+
+        nums[write] = nums[read]
+        write += 1
+        read += 1
+
+    return write"""
+
+CPP_CODE = """\
+int removeDuplicates(vector<int>& nums) {
+    if (nums.empty()) return 0;
+
+    int read = 1, write = 1, count = 1;
+    while (read < static_cast<int>(nums.size())) {
+        if (nums[read] == nums[read - 1]) {
+            ++count;
+            if (count > 2) {
+                ++read;
+                continue;
+            }
+        } else {
+            count = 1;
+        }
+
+        nums[write++] = nums[read++];
+    }
+
+    return write;
+}"""
+
+
+def line_of(source: str, anchor: str, occurrence: int = 1) -> int:
+    """Return the 1-indexed line number for an anchor in displayed source."""
+    lines = source.splitlines()
+    matches = [index for index, line in enumerate(lines, start=1) if anchor in line]
+    if len(matches) < occurrence:
+        raise SystemExit(
+            f"active-line anchor {anchor!r} (occurrence {occurrence}) not found; "
+            f"only {len(matches)} match(es) in source"
+        )
+    return matches[occurrence - 1]
+
+
+def active_line(python_anchor: str, cpp_anchor: str, *, python_occurrence: int = 1, cpp_occurrence: int = 1) -> dict:
+    return {
+        "python": line_of(PYTHON_CODE, python_anchor, python_occurrence),
+        "cpp": line_of(CPP_CODE, cpp_anchor, cpp_occurrence),
+    }
+
 
 def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
     """Run the displayed official read/write/count algorithm, recording its states."""
@@ -30,6 +93,7 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
                     "array": nums.copy(),
                     "window": {"start": 0, "end": write - 1},
                     "note": f"count = {count} > 2；不写入。有效前缀 nums[0:{write}] = {nums[:write]}。",
+                    "activeLine": active_line("read += 1", "++read"),
                 })
                 read += 1
                 continue
@@ -47,6 +111,7 @@ def remove_duplicates_with_trace(nums: list[int]) -> tuple[int, list[dict]]:
             "array": nums.copy(),
             "window": {"start": 0, "end": write - 1},
             "note": f"count = {count} <= 2；有效前缀 nums[0:{write}] = {nums[:write]}。",
+            "activeLine": active_line("nums[write] = nums[read]", "nums[write++] = nums[read++]"),
         })
         read += 1
 

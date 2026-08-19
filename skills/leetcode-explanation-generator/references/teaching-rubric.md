@@ -43,6 +43,7 @@ The numeric identity is calculated and shown before the general principle, so th
 ## Trace and visual fit
 
 - Does every frame correspond to a real algorithm state?
+- Does each frame's `activeLine` point to the source line that actually represents this step, rather than mechanically staying on a loop header?
 - Do pointer positions and highlights reveal the important choice without relying on hidden data?
 - If state is expressed in notes, are the notes short and deterministic enough to make the state legible?
 - If the representation is still unclear, record the limitation rather than adding a component without approval.

@@ -29,6 +29,12 @@ test('LC 80 commits generated traces for every supplied official and community a
     assert.equal(trace.approachId, approach.id);
     assert.ok(trace.frames.length > 3);
     assert.ok(trace.frames.every((frame) => Array.isArray(frame.array) && Array.isArray(frame.highlightIndices)));
+    for (const frame of trace.frames) {
+      for (const language of ['python', 'cpp']) {
+        assert.ok(Number.isInteger(frame.activeLine?.[language]), `${approach.id} ${language} activeLine is missing`);
+        assert.ok(frame.activeLine[language] >= 1 && frame.activeLine[language] <= approach.code[language].split('\n').length, `${approach.id} ${language} activeLine is outside the displayed source`);
+      }
+    }
   }
 });
 

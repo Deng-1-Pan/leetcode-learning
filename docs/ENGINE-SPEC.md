@@ -82,6 +82,14 @@ v2 的每份轨迹必须由同目录的 `generate_trace.py` 实际执行产生�
 
 `problemId` 和 `approachId` 必须分别匹配当前页面与目录名。每份已发布轨迹必须有非空 `frames`，每帧来自真实算法状态；`step` 从 `0` 递增，播放器按数组位置播放，不以 `step` 重新排序。
 
+### 公共帧字段：`activeLine`
+
+| 字段 | 类型 | 含义 |
+| --- | --- | --- |
+| `activeLine` | `{ [language: string]: number }` | 可选。当前帧对应的展示代码行号（1-indexed）；key 与该 approach 的 `code` 语言 key 一致，例如 `{"python": 6, "cpp": 6}`。缺失时播放器不高亮代码行，其余行为不受影响。 |
+
+`activeLine` 的行号必须指向该 approach 自己的 `meta.json.approaches[].code.<language>` 展示代码，而不是 `generate_trace.py` 自身的行号。播放器只读取这一已生成字段并高亮对应行，绝不在浏览器里重新解析或推断代码。
+
 ### `array-pointers` 帧字段
 
 | 字段 | 类型 | 含义 |
@@ -114,7 +122,7 @@ player.pause();
 player.reset();
 ```
 
-位置改变时发出 `step-change`，`detail` 为 `{ step, frame }`；播放状态改变时发出 `play-state-change`，`detail` 为 `{ isPlaying }`。首尾移动被安全钳制，播放到最后一帧自动暂停。
+位置改变时发出 `step-change`，`detail` 为 `{ step, frame }`；播放状态改变时发出 `play-state-change`，`detail` 为 `{ isPlaying }`。首尾移动被安全钳制，播放到最后一帧自动暂停。播放器与渲染器始终是纯读取者：包括代码行高亮在内，只消费生成阶段提供的帧字段，绝不在浏览器中重放、解析或推导算法。
 
 每个有效组件导出：
 

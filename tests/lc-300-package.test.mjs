@@ -27,6 +27,13 @@ test('LC 300 retains every supplied official and community approach as an indepe
     assert.equal(trace.problemId, meta.id);
     assert.equal(trace.approachId, approachId);
     assert.ok(trace.frames.length >= 6);
+    const approach = meta.approaches.find(({ id }) => id === approachId);
+    for (const frame of trace.frames) {
+      for (const language of ['python', 'cpp']) {
+        assert.ok(Number.isInteger(frame.activeLine?.[language]), `${approachId} ${language} activeLine is missing`);
+        assert.ok(frame.activeLine[language] >= 1 && frame.activeLine[language] <= approach.code[language].split('\n').length, `${approachId} ${language} activeLine is outside the displayed source`);
+      }
+    }
   }
 });
 

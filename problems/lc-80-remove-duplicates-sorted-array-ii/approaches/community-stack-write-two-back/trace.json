@@ -55,7 +55,11 @@
         "start": 0,
         "end": 1
       },
-      "note": "stackSize = 2；只要数组长度至少为 2，前两个元素一定合法。"
+      "note": "stackSize = 2；只要数组长度至少为 2，前两个元素一定合法。",
+      "activeLine": {
+        "python": 2,
+        "cpp": 2
+      }
     },
     {
       "step": 1,
@@ -83,7 +87,11 @@
         "start": 0,
         "end": 2
       },
-      "note": "nums[stackSize-2] = nums[0] = 0；1 != 0，stackSize = 3。"
+      "note": "nums[stackSize-2] = nums[0] = 0；1 != 0，stackSize = 3。",
+      "activeLine": {
+        "python": 6,
+        "cpp": 6
+      }
     },
     {
       "step": 2,
@@ -111,7 +119,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "nums[stackSize-2] = nums[1] = 0；1 != 0，stackSize = 4。"
+      "note": "nums[stackSize-2] = nums[1] = 0；1 != 0，stackSize = 4。",
+      "activeLine": {
+        "python": 6,
+        "cpp": 6
+      }
     },
     {
       "step": 3,
@@ -139,7 +151,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。"
+      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。",
+      "activeLine": {
+        "python": 5,
+        "cpp": 5
+      }
     },
     {
       "step": 4,
@@ -167,7 +183,11 @@
         "start": 0,
         "end": 3
       },
-      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。"
+      "note": "nums[stackSize-2] = nums[2] = 1；1 == 1，stackSize = 4。",
+      "activeLine": {
+        "python": 5,
+        "cpp": 5
+      }
     },
     {
       "step": 5,
@@ -196,7 +216,11 @@
         "start": 0,
         "end": 4
       },
-      "note": "nums[stackSize-2] = nums[2] = 1；2 != 1，stackSize = 5。"
+      "note": "nums[stackSize-2] = nums[2] = 1；2 != 1，stackSize = 5。",
+      "activeLine": {
+        "python": 6,
+        "cpp": 6
+      }
     },
     {
       "step": 6,
@@ -225,7 +249,11 @@
         "start": 0,
         "end": 5
       },
-      "note": "nums[stackSize-2] = nums[3] = 1；3 != 1，stackSize = 6。"
+      "note": "nums[stackSize-2] = nums[3] = 1；3 != 1，stackSize = 6。",
+      "activeLine": {
+        "python": 6,
+        "cpp": 6
+      }
     },
     {
       "step": 7,
@@ -254,7 +282,11 @@
         "start": 0,
         "end": 6
       },
-      "note": "nums[stackSize-2] = nums[4] = 2；3 != 2，stackSize = 7。"
+      "note": "nums[stackSize-2] = nums[4] = 2；3 != 2，stackSize = 7。",
+      "activeLine": {
+        "python": 6,
+        "cpp": 6
+      }
     }
   ]
 }

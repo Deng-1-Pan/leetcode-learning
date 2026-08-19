@@ -60,20 +60,51 @@ async function loadText(url) {
   return response.text();
 }
 
+function renderHighlightedLines(block, source, languageKey) {
+  const grammar = window.Prism?.languages?.[languageKey];
+  source.split('\n').forEach((lineText, index) => {
+    const line = document.createElement('span');
+    line.className = 'code-line';
+    line.dataset.line = String(index + 1);
+    line.innerHTML = grammar ? window.Prism.highlight(lineText, grammar, languageKey) : escapeHtml(lineText);
+    block.append(line);
+  });
+}
+
 function renderCodeTabs(container, code = {}) {
   const entries = Object.entries(code);
-  if (!entries.length) return;
+  if (!entries.length) return null;
   const tabs = document.createElement('div'); tabs.className = 'language-tabs';
   const panels = document.createElement('div');
+  const state = { activeLanguage: entries[0]?.[0] ?? null, onLanguageChange: null };
   entries.forEach(([language, source], index) => {
     const button = document.createElement('button'); button.className = `button secondary${index ? '' : ' active'}`; button.textContent = language;
     const panel = document.createElement('pre'); panel.className = 'code-panel'; panel.hidden = index !== 0;
-    const block = document.createElement('code'); block.className = `language-${language.toLowerCase()}`; block.textContent = source; panel.append(block);
-    button.addEventListener('click', () => { [...panels.children].forEach((item, panelIndex) => { item.hidden = panelIndex !== index; }); [...tabs.children].forEach((item, tabIndex) => item.classList.toggle('active', tabIndex === index)); });
+    const languageKey = language.toLowerCase();
+    const block = document.createElement('code'); block.className = `language-${languageKey}`; renderHighlightedLines(block, source, languageKey); panel.append(block);
+    button.addEventListener('click', () => {
+      [...panels.children].forEach((item, panelIndex) => { item.hidden = panelIndex !== index; });
+      [...tabs.children].forEach((item, tabIndex) => item.classList.toggle('active', tabIndex === index));
+      state.activeLanguage = language;
+      state.onLanguageChange?.();
+    });
     tabs.append(button); panels.append(panel);
   });
   container.append(tabs, panels);
-  window.Prism?.highlightAllUnder(container);
+  return state;
+}
+
+function wireCodeLineHighlight(section, player, codeState) {
+  const applyActiveLine = () => {
+    section.querySelectorAll('.code-line.is-active-line').forEach((line) => line.classList.remove('is-active-line'));
+    const lineNumber = player.frame.activeLine?.[codeState.activeLanguage];
+    if (lineNumber == null) return;
+    const panel = [...section.querySelectorAll('.code-panel')].find((item) => !item.hidden);
+    panel?.querySelector(`.code-line[data-line="${lineNumber}"]`)?.classList.add('is-active-line');
+  };
+  codeState.onLanguageChange = applyActiveLine;
+  player.addEventListener('step-change', applyActiveLine);
+  applyActiveLine();
 }
 
 function wireControls(root, player) {
@@ -95,8 +126,9 @@ function createPlayerSection({ approach, trace, legacy = false }) {
   const playerContent = document.createElement('div');
   playerContent.innerHTML = `<div class="player-status"><span class="step-number">#<span data-step>0</span></span><div><p class="frame-description" data-description>${escapeHtml(player.frame.description ?? '')}</p><p class="frame-note" data-note>${escapeHtml(player.frame.note ?? '')}</p></div></div><div data-visualization></div><div class="player-controls"><button class="button secondary" data-action="previous">上一步</button><button class="button" data-action="next">下一步</button><button class="button secondary" data-action="reset">重置</button><button class="button secondary" data-action="play">播放</button><input data-step-slider type="range" min="0" max="${trace.frames.length - 1}" value="0" aria-label="跳转到步骤"></div>`;
   section.append(playerContent);
-  if (approach.code) renderCodeTabs(section, approach.code);
+  const codeState = approach.code ? renderCodeTabs(section, approach.code) : null;
   wireControls(section, player);
+  if (codeState) wireCodeLineHighlight(section, player, codeState);
   return { section, player };
 }
 

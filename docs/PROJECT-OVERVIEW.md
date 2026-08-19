@@ -80,7 +80,7 @@ skills/leetcode-explanation-generator/
   references/teaching-rubric.md 验收标准，生成后必须对照检查
 
 scripts/build-index.mjs         扫描 problems/*/meta.json → 生成根目录 problems-index.json
-tests/                          13 个测试文件，`node --test` 运行，共 25 个 test case
+tests/                          14 个测试文件，`node --test` 运行；包含 active-line 源码同步校验
 .github/workflows/deploy.yml    push main → node scripts/build-index.mjs → GitHub 官方
                                  Pages actions (configure-pages/upload-pages-artifact/deploy-pages)
 docs/ENGINE-SPEC.md              player / 组件 / meta.json / trace.json / explain.md 的
@@ -91,9 +91,11 @@ docs/ENGINE-SPEC.md              player / 组件 / meta.json / trace.json / expl
 
 | id | 难度 | 格式 | vizType(s) | 备注 |
 | --- | --- | --- | --- | --- |
-| `lc-80-remove-duplicates-sorted-array-ii` | medium | v1 | array-pointers | Phase 2，已补追溯式 `_qc-checklist.md` |
+| `lc-80-remove-duplicates-sorted-array-ii` | medium | v2 | array-pointers | Phase 2，已补追溯式 `_qc-checklist.md` |
 | `lc-122-best-time-to-buy-and-sell-stock-ii` | medium | v1 | array-pointers | Phase 2，已补追溯式 `_qc-checklist.md`；"关键洞察"好范例来源 |
 | `lc-300-longest-increasing-subsequence` | medium | v2 | dp-grid（官方）+ array-pointers（社区） | Phase 3，含 `_qc-checklist.md` |
+
+所有 v2 trace 还可携带生成阶段计算的 `activeLine`，让代码面板只读取当前帧的行号并高亮对应 Python/C++ 源码行。
 
 ### 关键命令速查
 
