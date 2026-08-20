@@ -23,7 +23,7 @@ async function readMeta(path) {
       for (const field of approachRequiredFields) if (approach?.[field] === undefined) throw new Error(`Missing approach.${field} in ${path}`);
       if (ids.has(approach.id)) throw new Error(`Duplicate approach id ${approach.id} in ${path}`);
       ids.add(approach.id);
-      if (!['official', 'community'].includes(approach.sourceType)) throw new Error(`Unsupported approach sourceType ${approach.sourceType} in ${path}`);
+      if (!['official', 'community', 'debug'].includes(approach.sourceType)) throw new Error(`Unsupported approach sourceType ${approach.sourceType} in ${path}`);
       if (!supportedVizTypes.includes(approach.vizType)) throw new Error(`Unsupported approach vizType ${approach.vizType} in ${path}`);
       if (!Array.isArray(approach.languages) || !approach.code || typeof approach.code !== 'object') throw new Error(`approach.languages and approach.code must be valid in ${path}`);
     }

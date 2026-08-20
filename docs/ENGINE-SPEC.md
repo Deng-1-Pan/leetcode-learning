@@ -50,9 +50,13 @@ problems/<id>/
 }
 ```
 
-题目共用必填字段为 `id`、`title`、`difficulty`、`tags`、`leetcodeUrl`。v2 的 `approaches` 必须非空，且每项的 `id` 唯一；`id`、`label`、`sourceType`、`vizType`、`languages`、`code` 都是必填字段。`sourceType` 仅可为 `official` 或 `community`，并允许存在多个同来源项。每个用户提供的官方或社区方案都必须各自占一项、拥有独立 trace、播放器与代码；即使两个方案算法等价，也不得压缩为纯文字“实现变体”。当前注册的 `vizType` 为 `array-pointers`、`dp-grid`。
+题目共用必填字段为 `id`、`title`、`difficulty`、`tags`、`leetcodeUrl`。v2 的 `approaches` 必须非空，且每项的 `id` 唯一；`id`、`label`、`sourceType`、`vizType`、`languages`、`code` 都是必填字段。`sourceType` 可为 `official`、`community` 或 `debug`，并允许存在多个同来源项。`debug` 表示同一个 approach 的单步调试视图，不是第三种算法来源；推荐同时提供 `sourceApproachId` 供人阅读关联关系，但它不是契约必填字段。每个用户提供的官方或社区方案都必须各自占一项、拥有独立 trace、播放器与代码；即使两个方案算法等价，也不得压缩为纯文字“实现变体”。当前注册的 `vizType` 为 `array-pointers`、`dp-grid`、`variable-watch`。
 
 `code` 的键是语言名、值是展示源码；它必须与该 approach 的真实 `generate_trace.py` 算法等价。页面根据 `sourceType` 自动生成“官方解法”或“社区高赞”徽章，不从 Markdown 接收颜色。
+
+### 单步调试扩展
+
+在已有来源枚举之外，`sourceType` 还允许 `debug`。它表示同一个 approach 的单步调试视图，不是第三种算法来源；推荐附加 `sourceApproachId` 供人阅读关联关系，但它不是契约必填字段。当前注册的 `vizType` 还包括 `variable-watch`。页面对 `debug` 自动显示“单步调试”徽章。
 
 ### v1 兼容格式
 
@@ -89,6 +93,16 @@ v2 的每份轨迹必须由同目录的 `generate_trace.py` 实际执行产生�
 | `activeLine` | `{ [language: string]: number }` | 可选。当前帧对应的展示代码行号（1-indexed）；key 与该 approach 的 `code` 语言 key 一致，例如 `{"python": 6, "cpp": 6}`。缺失时播放器不高亮代码行，其余行为不受影响。 |
 
 `activeLine` 的行号必须指向该 approach 自己的 `meta.json.approaches[].code.<language>` 展示代码，而不是 `generate_trace.py` 自身的行号。播放器只读取这一已生成字段并高亮对应行，绝不在浏览器里重新解析或推断代码。
+
+### `variable-watch` 帧字段
+
+| 字段 | 类型 | 含义 |
+| --- | --- | --- |
+| `locals` | `Record<string, unknown>` | 当前解释器帧中可 JSON 序列化的局部变量快照；数组显示为一排格子，其他值显示为值标签。 |
+| `depth` | `number` | 当前 Python 调用栈中、属于被追踪源码的深度，主要帮助理解递归。 |
+| `event` | `"line" \| "return"` | 解释器事件类型；`line` 在该行执行前发生，`return` 表示函数从该行返回。 |
+
+单步调试帧同时带 `activeLine: {"python": number}`，复用现有代码高亮机制。它只有 `python` key：C++ 面板在此模式下仅作为静态参考（本试点的调试 view 因而只展示 Python），不伪造 C++ 的逐行执行或变量状态。
 
 ### `array-pointers` 帧字段
 

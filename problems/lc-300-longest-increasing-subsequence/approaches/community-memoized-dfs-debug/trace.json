@@ -1,0 +1,992 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "community-memoized-dfs-debug",
+  "sourceApproachId": "community-memoized-dfs",
+  "example": {
+    "nums": [
+      2,
+      5,
+      3,
+      7
+    ]
+  },
+  "result": {
+    "length": 3
+  },
+  "frames": [
+    {
+      "step": 0,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将给内层 dfs 加缓存：同一个 i 算过后，之后会直接复用答案。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 1,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将定义 dfs(i)：它回答“必须以 nums[i] 结尾时，最长能有多长”。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 2,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将给内层 dfs 加缓存：同一个 i 算过后，之后会直接复用答案。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 3,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将定义 dfs(i)：它回答“必须以 nums[i] 结尾时，最长能有多长”。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 4,
+      "line": 11,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 5,
+      "line": 11,
+      "depth": 2,
+      "event": "line",
+      "function": "<genexpr>",
+      "locals": {},
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 6,
+      "line": 6,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "进入 dfs(0)，先把只选 nums[0] = 2 的长度设为 1。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 7,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 0,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(0) 准备从左到右检查所有 j < 0 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 8,
+      "line": 10,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 0,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(0) 的前项检查结束，准备返回 best=1。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 9,
+      "line": 10,
+      "depth": 3,
+      "event": "return",
+      "function": "dfs",
+      "locals": {
+        "i": 0,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "returnValue": 1,
+      "note": "dfs(0) 算完，返回 1：以 nums[0] 结尾最长有 1 项。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 10,
+      "line": 11,
+      "depth": 2,
+      "event": "return",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 0
+      },
+      "returnValue": 1,
+      "note": "生成器把 dfs 的结果 1 交给 max，继续汇总所有结尾位置。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 11,
+      "line": 11,
+      "depth": 2,
+      "event": "line",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 0
+      },
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 12,
+      "line": 6,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "进入 dfs(1)，先把只选 nums[1] = 5 的长度设为 1。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 13,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(1) 准备从左到右检查所有 j < 1 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 14,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[0] = 2 小于 nums[1] = 5，可以尝试递归接上。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 15,
+      "line": 9,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将比较当前 best=1 与 dfs(0) + 1；dfs(0) 若已缓存会直接返回。",
+      "activeLine": {
+        "python": 9
+      }
+    },
+    {
+      "step": 16,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 2,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(1) 准备从左到右检查所有 j < 1 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 17,
+      "line": 10,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 2,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(1) 的前项检查结束，准备返回 best=2。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 18,
+      "line": 10,
+      "depth": 3,
+      "event": "return",
+      "function": "dfs",
+      "locals": {
+        "i": 1,
+        "best": 2,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "returnValue": 2,
+      "note": "dfs(1) 算完，返回 2：以 nums[1] 结尾最长有 2 项。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 19,
+      "line": 11,
+      "depth": 2,
+      "event": "return",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 1
+      },
+      "returnValue": 2,
+      "note": "生成器把 dfs 的结果 2 交给 max，继续汇总所有结尾位置。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 20,
+      "line": 11,
+      "depth": 2,
+      "event": "line",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 1
+      },
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 21,
+      "line": 6,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "进入 dfs(2)，先把只选 nums[2] = 3 的长度设为 1。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 22,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(2) 准备从左到右检查所有 j < 2 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 23,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[0] = 2 小于 nums[2] = 3，可以尝试递归接上。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 24,
+      "line": 9,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将比较当前 best=1 与 dfs(0) + 1；dfs(0) 若已缓存会直接返回。",
+      "activeLine": {
+        "python": 9
+      }
+    },
+    {
+      "step": 25,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 2,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(2) 准备从左到右检查所有 j < 2 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 26,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[1] = 5 不小于 nums[2] = 3，这一条不能接。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 27,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(2) 准备从左到右检查所有 j < 2 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 28,
+      "line": 10,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(2) 的前项检查结束，准备返回 best=2。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 29,
+      "line": 10,
+      "depth": 3,
+      "event": "return",
+      "function": "dfs",
+      "locals": {
+        "i": 2,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "returnValue": 2,
+      "note": "dfs(2) 算完，返回 2：以 nums[2] 结尾最长有 2 项。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 30,
+      "line": 11,
+      "depth": 2,
+      "event": "return",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 2
+      },
+      "returnValue": 2,
+      "note": "生成器把 dfs 的结果 2 交给 max，继续汇总所有结尾位置。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 31,
+      "line": 11,
+      "depth": 2,
+      "event": "line",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 2
+      },
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 32,
+      "line": 6,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "进入 dfs(3)，先把只选 nums[3] = 7 的长度设为 1。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 33,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(3) 准备从左到右检查所有 j < 3 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 34,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[0] = 2 小于 nums[3] = 7，可以尝试递归接上。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 35,
+      "line": 9,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 1,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将比较当前 best=1 与 dfs(0) + 1；dfs(0) 若已缓存会直接返回。",
+      "activeLine": {
+        "python": 9
+      }
+    },
+    {
+      "step": 36,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 2,
+        "j": 0,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(3) 准备从左到右检查所有 j < 3 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 37,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[1] = 5 小于 nums[3] = 7，可以尝试递归接上。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 38,
+      "line": 9,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 2,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将比较当前 best=2 与 dfs(1) + 1；dfs(1) 若已缓存会直接返回。",
+      "activeLine": {
+        "python": 9
+      }
+    },
+    {
+      "step": 39,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 1,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(3) 准备从左到右检查所有 j < 3 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 40,
+      "line": 8,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "nums[2] = 3 小于 nums[3] = 7，可以尝试递归接上。",
+      "activeLine": {
+        "python": 8
+      }
+    },
+    {
+      "step": 41,
+      "line": 9,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将比较当前 best=3 与 dfs(2) + 1；dfs(2) 若已缓存会直接返回。",
+      "activeLine": {
+        "python": 9
+      }
+    },
+    {
+      "step": 42,
+      "line": 7,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(3) 准备从左到右检查所有 j < 3 的位置。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 43,
+      "line": 10,
+      "depth": 3,
+      "event": "line",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "dfs(3) 的前项检查结束，准备返回 best=3。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 44,
+      "line": 10,
+      "depth": 3,
+      "event": "return",
+      "function": "dfs",
+      "locals": {
+        "i": 3,
+        "best": 3,
+        "j": 2,
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "returnValue": 3,
+      "note": "dfs(3) 算完，返回 3：以 nums[3] 结尾最长有 3 项。",
+      "activeLine": {
+        "python": 10
+      }
+    },
+    {
+      "step": 45,
+      "line": 11,
+      "depth": 2,
+      "event": "return",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 3
+      },
+      "returnValue": 3,
+      "note": "生成器把 dfs 的结果 3 交给 max，继续汇总所有结尾位置。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 46,
+      "line": 11,
+      "depth": 2,
+      "event": "line",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 3
+      },
+      "note": "外层函数即将汇总每个结尾位置的 dfs(i)，取其中最大值。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 47,
+      "line": 11,
+      "depth": 2,
+      "event": "return",
+      "function": "<genexpr>",
+      "locals": {
+        "i": 3
+      },
+      "returnValue": null,
+      "note": "生成器把 dfs 的结果 None 交给 max，继续汇总所有结尾位置。",
+      "activeLine": {
+        "python": 11
+      }
+    },
+    {
+      "step": 48,
+      "line": 11,
+      "depth": 1,
+      "event": "return",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "returnValue": 3,
+      "note": "外层函数返回 3，这就是整个数组的 LIS 长度。",
+      "activeLine": {
+        "python": 11
+      }
+    }
+  ]
+}

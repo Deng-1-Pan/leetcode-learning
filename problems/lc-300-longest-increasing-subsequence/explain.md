@@ -80,6 +80,11 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 
 **现在只需要记住：** `dp[i]` 只看更小的前项，并取它们的最好长度加一。
 
+**想看这段代码到底怎么一行一行跑起来？** 下面用一个更短的例子 `nums = [2, 5, 3, 7]` 把上面这段代码完整走一遍，配合右侧的变量监视看每一步发生了什么。
+
+:::viz approach="official-dp-debug"
+:::
+
 ### 方案二：构建候选序列（线性扫描）
 
 **这一小步要解决什么？** DP 要比较很多前项。能不能同样长度只留一个最有用的结尾？
@@ -148,6 +153,11 @@ Follow up: Can you come up with an algorithm that runs in `O(n log(n))` time com
 时间 `O(n^2)`，空间 `O(n)`。
 
 **现在只需要记住：** 记忆化就是“算过一次，记下来，下次直接用”。
+
+**想看递归和缓存到底怎么一行一行跑起来？** 下面同样用 `nums = [2, 5, 3, 7]` 完整走一遍。注意右侧变量监视里的调用深度和每次 `dfs` 返回的值。
+
+:::viz approach="community-memoized-dfs-debug"
+:::
 
 ### 方案二：递推
 

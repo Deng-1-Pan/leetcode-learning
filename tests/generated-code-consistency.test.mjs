@@ -52,10 +52,11 @@ test('LC 122 displayed Python and C++ implementations match the generated trace 
   assert.equal(cppOutput, '7');
 });
 
-test('LC 300 displayed implementations match every supplied approach trace result', async () => {
+test('LC 300 displayed executable implementations match every supplied approach trace result', async () => {
   const meta = await metaFor('lc-300-longest-increasing-subsequence');
   const input = '[10, 9, 2, 5, 3, 7, 101, 18]';
   for (const approach of meta.approaches) {
+    if (approach.sourceType === 'debug') continue;
     if (approach.id === 'community-reconstruct-lis') {
       const python = `${approach.code.python}\nprint(*findLIS(${input}))`;
       assert.equal(execFileSync('python3', ['-c', python], { encoding: 'utf8' }).trim(), '2 3 7 18');

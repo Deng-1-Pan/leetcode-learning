@@ -1,0 +1,737 @@
+{
+  "problemId": "lc-300-longest-increasing-subsequence",
+  "approachId": "official-dp-debug",
+  "sourceApproachId": "official-dp",
+  "example": {
+    "nums": [
+      2,
+      5,
+      3,
+      7
+    ]
+  },
+  "result": {
+    "length": 3
+  },
+  "frames": [
+    {
+      "step": 0,
+      "line": 2,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ]
+      },
+      "note": "即将初始化：每个数自己都能构成长度为 1 的递增子序列。下一步会创建 dp 表。",
+      "activeLine": {
+        "python": 2
+      }
+    },
+    {
+      "step": 1,
+      "line": 3,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "note": "dp 表已经初始化，准备开始外层循环，依次确定每个位置作为结尾时的答案。",
+      "activeLine": {
+        "python": 3
+      }
+    },
+    {
+      "step": 2,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "i": 1
+      },
+      "note": "外层循环来到 i=1（nums[i]=5）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 3,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "i": 1,
+        "j": 0
+      },
+      "note": "2 比 5 小，可以接在 i=1 的数前面。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 4,
+      "line": 6,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "i": 1,
+        "j": 0
+      },
+      "note": "确实可以接上：即将把 dp[1] 更新为 max(dp[1], dp[0] + 1) = max(1, 1 + 1)。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 5,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "i": 1,
+        "j": 0
+      },
+      "note": "外层循环来到 i=1（nums[i]=5）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 6,
+      "line": 3,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "i": 1,
+        "j": 0
+      },
+      "note": "刚完成 i=1 的检查；外层循环即将继续寻找下一个结尾位置。",
+      "activeLine": {
+        "python": 3
+      }
+    },
+    {
+      "step": 7,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "i": 2,
+        "j": 0
+      },
+      "note": "外层循环来到 i=2（nums[i]=3）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 8,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "i": 2,
+        "j": 0
+      },
+      "note": "2 比 3 小，可以接在 i=2 的数前面。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 9,
+      "line": 6,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "i": 2,
+        "j": 0
+      },
+      "note": "确实可以接上：即将把 dp[2] 更新为 max(dp[2], dp[0] + 1) = max(1, 1 + 1)。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 10,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 2,
+        "j": 0
+      },
+      "note": "外层循环来到 i=2（nums[i]=3）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 11,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 2,
+        "j": 1
+      },
+      "note": "5 不比 3 小，不能组成严格递增关系，跳过。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 12,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 2,
+        "j": 1
+      },
+      "note": "外层循环来到 i=2（nums[i]=3）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 13,
+      "line": 3,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 2,
+        "j": 1
+      },
+      "note": "刚完成 i=2 的检查；外层循环即将继续寻找下一个结尾位置。",
+      "activeLine": {
+        "python": 3
+      }
+    },
+    {
+      "step": 14,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 3,
+        "j": 1
+      },
+      "note": "外层循环来到 i=3（nums[i]=7）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 15,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 3,
+        "j": 0
+      },
+      "note": "2 比 7 小，可以接在 i=3 的数前面。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 16,
+      "line": 6,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "i": 3,
+        "j": 0
+      },
+      "note": "确实可以接上：即将把 dp[3] 更新为 max(dp[3], dp[0] + 1) = max(1, 1 + 1)。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 17,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "i": 3,
+        "j": 0
+      },
+      "note": "外层循环来到 i=3（nums[i]=7）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 18,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "i": 3,
+        "j": 1
+      },
+      "note": "5 比 7 小，可以接在 i=3 的数前面。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 19,
+      "line": 6,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "i": 3,
+        "j": 1
+      },
+      "note": "确实可以接上：即将把 dp[3] 更新为 max(dp[3], dp[1] + 1) = max(2, 2 + 1)。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 20,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 1
+      },
+      "note": "外层循环来到 i=3（nums[i]=7）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 21,
+      "line": 5,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "note": "3 比 7 小，可以接在 i=3 的数前面。",
+      "activeLine": {
+        "python": 5
+      }
+    },
+    {
+      "step": 22,
+      "line": 6,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "note": "确实可以接上：即将把 dp[3] 更新为 max(dp[3], dp[2] + 1) = max(3, 2 + 1)。",
+      "activeLine": {
+        "python": 6
+      }
+    },
+    {
+      "step": 23,
+      "line": 4,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "note": "外层循环来到 i=3（nums[i]=7）：现在检查它前面的每个位置。",
+      "activeLine": {
+        "python": 4
+      }
+    },
+    {
+      "step": 24,
+      "line": 3,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "note": "刚完成 i=3 的检查；外层循环即将继续寻找下一个结尾位置。",
+      "activeLine": {
+        "python": 3
+      }
+    },
+    {
+      "step": 25,
+      "line": 7,
+      "depth": 1,
+      "event": "line",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "note": "全部位置算完：dp = [1, 2, 2, 3]，最大值 3 就是答案。",
+      "activeLine": {
+        "python": 7
+      }
+    },
+    {
+      "step": 26,
+      "line": 7,
+      "depth": 1,
+      "event": "return",
+      "function": "lengthOfLIS",
+      "locals": {
+        "nums": [
+          2,
+          5,
+          3,
+          7
+        ],
+        "dp": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "i": 3,
+        "j": 2
+      },
+      "returnValue": 3,
+      "note": "函数返回 3：这就是整个数组的最长递增子序列长度。",
+      "activeLine": {
+        "python": 7
+      }
+    }
+  ]
+}

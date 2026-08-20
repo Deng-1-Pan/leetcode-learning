@@ -2,7 +2,7 @@ import { TracePlayer } from './player-core.js';
 import { loadVisualizer } from './viz-registry.js';
 
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
-const sourceLabels = { official: '官方解法', community: '社区高赞' };
+const sourceLabels = { official: '官方解法', community: '社区高赞', debug: '单步调试' };
 
 export function markdownToHtml(markdown) {
   const lines = markdown.replaceAll('\r\n', '\n').split('\n');

@@ -1,6 +1,7 @@
 const renderers = {
   'array-pointers': () => import('./components/viz-array-pointers.js'),
   'dp-grid': () => import('./components/viz-dp-grid.js'),
+  'variable-watch': () => import('./components/viz-variable-watch.js'),
 };
 
 export async function loadVisualizer(vizType) {

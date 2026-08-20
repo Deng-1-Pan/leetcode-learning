@@ -45,6 +45,19 @@
         }
       },
       {
+        "id": "official-dp-debug",
+        "label": "单步调试：动态规划怎么一行一行跑",
+        "sourceType": "debug",
+        "sourceApproachId": "official-dp",
+        "vizType": "variable-watch",
+        "languages": [
+          "python"
+        ],
+        "code": {
+          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    dp = [1] * len(nums)\n    for i in range(1, len(nums)):\n        for j in range(i):\n            if nums[j] < nums[i]:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)"
+        }
+      },
+      {
         "id": "official-greedy-linear-scan",
         "label": "官方方案二：构建候选序列（线性扫描）",
         "sourceType": "official",
@@ -84,6 +97,19 @@
         "code": {
           "python": "from functools import cache\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    @cache\n    def dfs(i: int) -> int:\n        best = 1\n        for j in range(i):\n            if nums[j] < nums[i]:\n                best = max(best, dfs(j) + 1)\n        return best\n    return max(dfs(i) for i in range(len(nums)))",
           "cpp": "int lengthOfLIS(const vector<int>& nums) {\n    vector<int> memo(nums.size());\n    function<int(int)> dfs = [&](int i) {\n        if (memo[i]) return memo[i];\n        int best = 1;\n        for (int j = 0; j < i; ++j) if (nums[j] < nums[i]) best = max(best, dfs(j) + 1);\n        return memo[i] = best;\n    };\n    int answer = 0;\n    for (int i = 0; i < static_cast<int>(nums.size()); ++i) answer = max(answer, dfs(i));\n    return answer;\n}"
+        }
+      },
+      {
+        "id": "community-memoized-dfs-debug",
+        "label": "单步调试：记忆化搜索怎么一行一行跑",
+        "sourceType": "debug",
+        "sourceApproachId": "community-memoized-dfs",
+        "vizType": "variable-watch",
+        "languages": [
+          "python"
+        ],
+        "code": {
+          "python": "from functools import cache\n\ndef lengthOfLIS(nums: list[int]) -> int:\n    @cache\n    def dfs(i: int) -> int:\n        best = 1\n        for j in range(i):\n            if nums[j] < nums[i]:\n                best = max(best, dfs(j) + 1)\n        return best\n    return max(dfs(i) for i in range(len(nums)))"
         }
       },
       {

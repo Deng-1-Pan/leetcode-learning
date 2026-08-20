@@ -23,9 +23,9 @@ const packages = [
   ]],
 ];
 
-function generatorCode(directory) {
-  const script = "import json, runpy, sys; namespace = runpy.run_path(sys.argv[1]); print(json.dumps([namespace['PYTHON_CODE'], namespace['CPP_CODE']]))";
-  const result = spawnSync('python3', ['-c', script, 'generate_trace.py'], {
+function generatorCode(directory, keys = ['PYTHON_CODE', 'CPP_CODE']) {
+  const script = "import json, runpy, sys; namespace = runpy.run_path(sys.argv[1]); print(json.dumps([namespace[key] for key in sys.argv[2:]]))";
+  const result = spawnSync('python3', ['-c', script, 'generate_trace.py', ...keys], {
     cwd: fileURLToPath(directory),
     encoding: 'utf8',
   });
@@ -43,5 +43,21 @@ test('LC 300 and LC 80 generators keep active-line source copies synchronized wi
       assert.equal(python, approach.code.python, `${problemId}/${approachId} Python source is stale`);
       assert.equal(cpp, approach.code.cpp, `${problemId}/${approachId} C++ source is stale`);
     }
+  }
+});
+
+test('LC 300 debug generators keep their Python source copies synchronized with their paired approaches', async () => {
+  const directory = new URL('lc-300-longest-increasing-subsequence/', root);
+  const meta = JSON.parse(await readFile(new URL('meta.json', directory), 'utf8'));
+  for (const [debugId, sourceId] of [
+    ['official-dp-debug', 'official-dp'],
+    ['community-memoized-dfs-debug', 'community-memoized-dfs'],
+  ]) {
+    const debug = meta.approaches.find(({ id }) => id === debugId);
+    const source = meta.approaches.find(({ id }) => id === sourceId);
+    const [python] = generatorCode(new URL(`approaches/${debugId}/`, directory), ['PYTHON_CODE']);
+    assert.equal(debug.sourceApproachId, sourceId);
+    assert.equal(debug.code.python, source.code.python);
+    assert.equal(python, source.code.python);
   }
 });
