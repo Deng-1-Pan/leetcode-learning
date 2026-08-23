@@ -124,9 +124,9 @@ function createPlayerSection({ approach, trace, legacy = false }) {
     section.innerHTML = `<div class="approach-heading"><span class="source-badge source-${escapeHtml(approach.sourceType)}">${escapeHtml(sourceLabels[approach.sourceType] ?? approach.sourceType)}</span><strong>${escapeHtml(approach.label)}</strong></div>`;
   }
   const playerContent = document.createElement('div');
-  playerContent.innerHTML = `<div class="player-status"><span class="step-number">#<span data-step>0</span></span><div><p class="frame-description" data-description>${escapeHtml(player.frame.description ?? '')}</p><p class="frame-note" data-note>${escapeHtml(player.frame.note ?? '')}</p></div></div><div data-visualization></div><div class="player-controls"><button class="button secondary" data-action="previous">上一步</button><button class="button" data-action="next">下一步</button><button class="button secondary" data-action="reset">重置</button><button class="button secondary" data-action="play">播放</button><input data-step-slider type="range" min="0" max="${trace.frames.length - 1}" value="0" aria-label="跳转到步骤"></div>`;
+  playerContent.innerHTML = `<div class="player-status"><span class="step-number">#<span data-step>0</span></span><div><p class="frame-description" data-description>${escapeHtml(player.frame.description ?? '')}</p><p class="frame-note" data-note>${escapeHtml(player.frame.note ?? '')}</p></div></div><div class="player-columns"><div class="player-visualization" data-visualization></div><div class="player-code"></div></div><div class="player-controls"><button class="button secondary" data-action="previous">上一步</button><button class="button" data-action="next">下一步</button><button class="button secondary" data-action="reset">重置</button><button class="button secondary" data-action="play">播放</button><input data-step-slider type="range" min="0" max="${trace.frames.length - 1}" value="0" aria-label="跳转到步骤"></div>`;
   section.append(playerContent);
-  const codeState = approach.code ? renderCodeTabs(section, approach.code) : null;
+  const codeState = approach.code ? renderCodeTabs(section.querySelector('.player-code'), approach.code) : null;
   wireControls(section, player);
   if (codeState) wireCodeLineHighlight(section, player, codeState);
   return { section, player };

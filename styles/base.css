@@ -7,7 +7,7 @@ button { cursor: pointer; }
 a { color: var(--color-accent); }
 code, pre { font-family: var(--font-mono); }
 pre { overflow-x: auto; padding: var(--space-4); background: #172033; border-radius: var(--radius); color: #e8eef8; }
-.site-shell { width: min(1120px, calc(100% - 2rem)); margin-inline: auto; }
+.site-shell { width: min(1200px, calc(100% - 2rem)); margin-inline: auto; }
 .site-header { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-6) 0 var(--space-5); border-bottom: 1px solid var(--color-border); }
 .site-header a { color: inherit; text-decoration: none; }
 .eyebrow { color: var(--color-muted); font: 700 0.75rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }

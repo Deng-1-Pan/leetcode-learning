@@ -13,3 +13,4 @@
 - [x] 在 `http://localhost:8005/` 复测：显示 3 个播放器，控制台 error/warning 为 0。
 - [x] 在当前工作树的 `http://localhost:8006/` 真实浏览器复测代码行高亮：官方覆盖方案用 next/previous、slider 和 Python/C++ tab 验证保留时的写入行与跳过第三次出现时的 `read += 1`/`++read`；社区栈式方案验证初始化、写入 `nums[stack_size] = nums[i]` 和拒绝第三次时的比较条件会随步进/回退改变。控制台 error/warning 为 0。
 - [x] 已按独立推导洞察标准复查：两个官方方案与社区栈式方案都有各自的 `:::insight`；社区方案明确从紧邻的官方覆盖写入方案的限制出发。
+- [x] 在本地 `http://127.0.0.1:8005/problems/lc-80-remove-duplicates-sorted-array-ii/` 以 1280px 宽真实浏览器复测：3 个播放器均为左可视化、右代码的 463px/463px 等宽两栏，页面 `.content` 为 1000px 而正文保持 780px，控制台 error/warning 为 0。缩至 759px 后 3 个播放器均退回单列上下堆叠，播放器本身无横向溢出，控制台 error/warning 为 0。
